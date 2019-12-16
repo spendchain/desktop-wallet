@@ -1,4 +1,4 @@
-import BigNumber from 'bignumber.js'
+import BigNumber from 'bignumber.js/bignumber.mjs'
 
 // Avoid scientific notation
 // https://github.com/MikeMcl/bignumber.js/blob/master/bignumber.d.ts#L97

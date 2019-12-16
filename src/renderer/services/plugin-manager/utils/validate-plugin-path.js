@@ -1,7 +1,7 @@
 import path from 'path'
-import fs from 'fs'
+// import fs from 'fs'
 
-export function validatePluginPath (pluginPath) {
+export async function validatePluginPath (app, pluginPath) {
   const structureExists = [
     'package.json',
     'src',
@@ -9,7 +9,7 @@ export function validatePluginPath (pluginPath) {
   ]
 
   for (const pathCheck of structureExists) {
-    if (!fs.existsSync(path.resolve(pluginPath, pathCheck))) {
+    if (!app.fs_existsSync(path.resolve(pluginPath, pathCheck))) {
       throw new Error(`'${pathCheck}' does not exist`)
     }
   }

@@ -3,11 +3,11 @@
     class="PluginLogo"
     :style="{ height: `${size}px`, width: `${size}px` }"
   >
-    <img
+    <VueFreezeframe
       v-if="plugin.logo"
       class="PluginLogo__image"
       :src="`data:image/png;base64,${plugin.logo}`"
-    >
+    />
 
     <PluginIdenticon
       v-else
@@ -19,12 +19,14 @@
 
 <script>
 import PluginIdenticon from '@/components/PluginManager/PluginIdenticon'
+import { VueFreezeframe } from 'vue-freezeframe'
 
 export default {
   name: 'PluginLogo',
 
   components: {
-    PluginIdenticon
+    PluginIdenticon,
+    VueFreezeframe
   },
 
   props: {

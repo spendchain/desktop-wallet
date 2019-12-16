@@ -2,7 +2,7 @@ import { Connection } from '@arkecosystem/client'
 import { Transactions } from '@arkecosystem/crypto'
 import { castArray, chunk, orderBy } from 'lodash'
 import moment from 'moment'
-import logger from 'electron-log'
+// import logger from 'electron-log'
 import { TRANSACTION_TYPES } from '@config'
 import store from '@/store'
 import eventBus from '@/plugins/event-bus'
@@ -183,6 +183,8 @@ export default class ClientService {
       page
     })
 
+    console.log('fetchTransactions body', body)
+
     transactions = body.data.map(transaction => {
       transaction.timestamp = transaction.timestamp.unix * 1000 // to milliseconds
       return transaction
@@ -268,7 +270,7 @@ export default class ClientService {
         })
         transactions.push(...body.data)
       } catch (error) {
-        logger.error(error)
+        window.logger.error(error)
         hadFailure = true
       }
     }
@@ -311,7 +313,7 @@ export default class ClientService {
       try {
         walletData[address] = (await this.fetchWalletTransactions(address, options)).transactions
       } catch (error) {
-        logger.error(error)
+        window.logger.error(error)
         const message = error.response ? error.response.body.message : error.message
         if (message !== 'Wallet not found') {
           throw error
@@ -362,7 +364,7 @@ export default class ClientService {
     try {
       walletData = await this.fetchWallet(address)
     } catch (error) {
-      logger.error(error)
+      window.logger.error(error)
       const message = error.response ? error.response.body.message : error.message
       if (message !== 'Wallet not found') {
         throw error

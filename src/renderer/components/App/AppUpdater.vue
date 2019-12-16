@@ -105,7 +105,7 @@
 <script>
 import { ModalWindow } from '@/components/Modal'
 import { ProgressBar } from '@/components/ProgressBar'
-import { ipcRenderer } from 'electron'
+// import { ipcRenderer } from 'electron'
 import { mapGetters } from 'vuex'
 import cheerio from 'cheerio'
 import releaseService from '@/services/release'
@@ -174,17 +174,17 @@ export default {
   },
 
   mounted () {
-    ipcRenderer.on('updater:download-progress', (_, data) => {
+    window.ipcRenderer().on('updater:download-progress', (_, data) => {
       this.progressUpdate.timestamp = Date.now()
       Object.assign(this.progressUpdate, data)
     })
 
-    ipcRenderer.on('updater:update-downloaded', () => {
+    window.ipcRenderer().on('updater:update-downloaded', () => {
       Vue.set(this.progressUpdate, 'percent', 100)
       this.isDownloadFinished = true
     })
 
-    ipcRenderer.on('updater:error', (error) => {
+    window.ipcRenderer().on('updater:error', (error) => {
       this.isDownloadFailed = true
       this.errorMessage = error instanceof Error ? error.message : undefined
     })
@@ -198,7 +198,7 @@ export default {
     clearInterval(this.inactivityListener)
     if (this.isDownloadCancelled) {
       // Recreate the cancellation token
-      setTimeout(() => ipcRenderer.send('updater:check-for-updates'), 200)
+      setTimeout(() => window.ipcRenderer().send('updater:check-for-updates'), 200)
     }
   },
 
@@ -213,7 +213,7 @@ export default {
 
     cancel () {
       this.isDownloadCancelled = true
-      ipcRenderer.send('updater:cancel')
+      window.ipcRenderer().send('updater:cancel')
     },
 
     startDownload () {
@@ -225,11 +225,11 @@ export default {
       }
 
       this.isDownloadAuthorized = true
-      ipcRenderer.send('updater:download-update')
+      window.ipcRenderer().send('updater:download-update')
     },
 
     quitAndInstall () {
-      ipcRenderer.send('updater:quit-and-install')
+      window.ipcRenderer().send('updater:quit-and-install')
     },
 
     verifyInactivity () {

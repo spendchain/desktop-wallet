@@ -1,6 +1,6 @@
-import got from 'got/source/index'
+import ky from 'ky'
 import { request } from 'stream-http'
 
-const client = got.extend({ request, stream: false })
+const client = ky.extend({ request, stream: false })
 
 export default client

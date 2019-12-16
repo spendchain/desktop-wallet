@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import electron from 'electron'
+// import electron from 'electron'
 import at from 'lodash/at'
 /* eslint-disable vue/no-unused-components */
 import { WalletSelectDelegate } from '@/components/Wallet'
@@ -367,12 +367,12 @@ export default {
 
   methods: {
     historyBack () {
-      const webContents = electron.remote.getCurrentWindow().webContents
-      if (!webContents.canGoBack()) {
-        throw new Error('It is not possible to go back in history')
-      }
+      // const webContents = electron.remote.getCurrentWindow().webContents
+      // if (!webContents.canGoBack()) {
+      //   throw new Error('It is not possible to go back in history')
+      // }
 
-      webContents.goBack()
+      // webContents.goBack()
     },
 
     switchToTab (component) {

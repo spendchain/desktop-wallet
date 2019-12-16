@@ -1,5 +1,5 @@
 import path from 'path'
-import fs from 'fs'
+// import fs from 'fs'
 import { castArray } from 'lodash'
 import {
   COMPONENTS,
@@ -25,11 +25,13 @@ import * as FontAwesomeSetup from './setup/font-awesome-setup'
 
 export class PluginSetup {
   constructor ({
+    app,
     plugin,
     sandbox,
     vue,
     profileId
   }) {
+    this.app = app
     this.plugin = plugin
     this.sandbox = sandbox
     this.profileId = profileId
@@ -37,16 +39,16 @@ export class PluginSetup {
     const localVue = vue.extend()
     localVue.options._base = localVue
     this.vue = localVue
-
-    this.pluginObject = this.sandbox.getComponentVM().run(
-      fs.readFileSync(path.join(plugin.fullPath, 'src/index.js')),
-      path.join(plugin.fullPath, 'src/index.js')
-    )
-
-    this.setups = this.__mapPermissionsToSetup()
   }
 
   async install () {
+    this.pluginObject = this.sandbox.getComponentVM().run(
+      (await this.app.fs_readFileSync(path.join(this.plugin.fullPath, 'src/index.js'))).toString(),
+      path.join(this.plugin.fullPath, 'src/index.js')
+    )
+
+    this.setups = await this.__mapPermissionsToSetup()
+
     await this.__run(this.setups[PUBLIC.name])
 
     const permissions = this.plugin.config.permissions
@@ -74,14 +76,14 @@ export class PluginSetup {
     }
   }
 
-  __mapPermissionsToSetup () {
+  async __mapPermissionsToSetup () {
     return {
       [AVATARS.name]: AvatarsSetup.create(this.plugin, this.pluginObject, this.sandbox, this.profileId),
       [WALLET_TABS.name]: WalletTabsSetup.create(this.plugin, this.pluginObject, this.sandbox, this.profileId),
       [ROUTES.name]: RoutesSetup.create(this.plugin, this.pluginObject, this.sandbox),
-      [COMPONENTS.name]: ComponentsSetup.create(this.plugin, this.pluginObject, this.sandbox, this.vue),
+      [COMPONENTS.name]: await ComponentsSetup.create(this.app, this.plugin, this.pluginObject, this.sandbox, this.vue),
       [MENU_ITEMS.name]: MenuItemsSetup.create(this.plugin, this.pluginObject, this.sandbox, this.profileId),
-      [THEMES.name]: ThemesSetup.create(this.plugin, this.pluginObject, this.sandbox, this.profileId),
+      [THEMES.name]: await ThemesSetup.create(this.app, this.plugin, this.pluginObject, this.sandbox, this.profileId),
       [PUBLIC.name]: [
         RegisterSetup.create(this.pluginObject),
         FontAwesomeSetup.create(this.plugin)

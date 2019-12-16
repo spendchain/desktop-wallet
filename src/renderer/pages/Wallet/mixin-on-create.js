@@ -1,4 +1,3 @@
-import Bip38 from '@/services/bip38'
 import WalletService from '@/services/wallet'
 
 export default {
@@ -26,15 +25,14 @@ export default {
         }
 
         let failed = false
-        const bip38 = new Bip38()
         try {
-          const { bip38key } = await bip38.encrypt(dataToEncrypt)
+          const { bip38key } = await this.bip38_encrypt(dataToEncrypt)
+          console.log('bip38 onCreate bip38key', bip38key)
           this.wallet.passphrase = bip38key
-        } catch (_error) {
+        } catch (error) {
+          this.$logger.error('Failed to encrypt:', error)
           this.$error(this.$t('ENCRYPTION.FAILED_ENCRYPT'))
           failed = true
-        } finally {
-          bip38.quit()
         }
 
         this.showEncryptLoader = false

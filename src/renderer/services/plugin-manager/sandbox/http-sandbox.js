@@ -1,4 +1,4 @@
-import got from 'got'
+import ky from 'ky'
 
 class PluginHttp {
   constructor (whitelist) {
@@ -29,13 +29,13 @@ class PluginHttp {
   get (url, opts) {
     this.validateUrl(url)
 
-    return got.get(url, opts)
+    return ky.get(url, opts)
   }
 
   post (url, opts) {
     this.validateUrl(url)
 
-    return got.post(url, opts)
+    return ky.post(url, opts)
   }
 }
 

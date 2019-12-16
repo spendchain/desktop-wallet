@@ -1,16 +1,15 @@
 import { PLUGINS } from '@config'
 import chunk from 'lodash/chunk'
-import got from 'got'
-import packageJson from 'package-json'
+import ky from 'ky'
 
 const CHUNKSIZE = 50
 
 class NpmAdapter {
   constructor () {
-    this.baseUrl = 'https://registry.npmjs.com'
+    this.baseUrl = 'https://registry.npmjs.com/'
   }
 
-  async all () {
+  async all (app) {
     let packageData = []
     const plugins = []
 
@@ -30,16 +29,20 @@ class NpmAdapter {
       from = from + size
     }
 
+    console.log('NpmAdapter all plugins', plugins)
+
     for (const pluginChunk of chunk(plugins, CHUNKSIZE)) {
       const requests = []
 
       for (const plugin of pluginChunk) {
-        requests.push(packageJson(plugin.name, { fullMetadata: true }))
+        requests.push(await app.misc_getNpmPackageJson(plugin.name, { fullMetadata: true }))
       }
 
       const results = await Promise.all(requests)
       packageData = packageData.concat(results)
     }
+
+    console.log('NpmAdapter all packageData', packageData)
 
     return packageData
   }
@@ -47,16 +50,15 @@ class NpmAdapter {
   async fetchPlugins (options = {}) {
     const keywords = PLUGINS.keywords.join(' ')
 
-    const { body } = await got('/-/v1/search', {
-      query: {
+    const body = await ky('-/v1/search', {
+      searchParams: {
         text: `keywords:${keywords}`,
         from: options.from || 0,
         size: options.size || 250,
         t: Date.now()
       },
-      baseUrl: this.baseUrl,
-      json: true
-    })
+      prefixUrl: this.baseUrl
+    }).json()
 
     return {
       plugins: body.objects.map(plugin => plugin.package),

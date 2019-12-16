@@ -1,9 +1,22 @@
 import isElement from 'lodash/isElement'
 
-export function getSafeContext (vueContext, component) {
-  const context = vueContext._data || {}
+export function getSafeContext (vueContext, component, allVueMethods = false) {
+  const context = {}
 
-  const keys = ['$nextTick', '_c', '_v', '_s', '_e', '_m', '_l', '_u']
+  for (const contextDataKey of Object.keys(vueContext._data || {})) {
+    context.__defineGetter__(contextDataKey, () => {
+      return vueContext._data[contextDataKey]
+    })
+
+    context.__defineSetter__(contextDataKey, (value) => {
+      vueContext._data[contextDataKey] = value
+    })
+  }
+
+  const keys = ['$nextTick']
+  if (allVueMethods) {
+    keys.push('_c', '_v', '_s', '_e', '_m', '_l', '_u')
+  }
 
   for (const key of keys) {
     context[key] = vueContext[key]

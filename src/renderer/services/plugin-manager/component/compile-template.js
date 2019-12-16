@@ -11,7 +11,7 @@ export function compileTemplate (vm, template) {
       component.staticRenderFns = compiled.staticRenderFns
     } else {
       component.render = function () {
-        return compiled.render.apply(prepareContext(this, component), [ ...arguments ])
+        return compiled.render.apply(prepareContext(this, component, true), [ ...arguments ])
       }
     }
     module.exports = component`,

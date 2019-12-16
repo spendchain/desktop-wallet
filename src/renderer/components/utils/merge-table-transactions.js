@@ -1,5 +1,5 @@
 import { orderBy, uniqBy } from 'lodash'
-import BigNumber from 'bignumber.js'
+import BigNumber from 'bignumber.js/bignumber.mjs'
 
 /**
  * This utility is used to merge the transactions that have been fetched using

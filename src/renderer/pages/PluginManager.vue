@@ -202,7 +202,7 @@
 </template>
 
 <script>
-import { ipcRenderer } from 'electron'
+// import { ipcRenderer } from 'electron'
 import { isEqual, sortBy, uniq } from 'lodash'
 import { ButtonLayout, ButtonReload } from '@/components/Button'
 import {
@@ -401,13 +401,13 @@ export default {
   },
 
   mounted () {
-    ipcRenderer.on('plugin-manager:plugin-installed', this.onPluginInstalled)
-    ipcRenderer.on('plugin-manager:error', this.onError)
+    window.ipcRenderer().on('plugin-manager:plugin-installed', this.onPluginInstalled)
+    window.ipcRenderer().on('plugin-manager:error', this.onError)
   },
 
   beforeDestroy () {
-    ipcRenderer.removeListener('plugin-manager:plugin-installed', this.onPluginInstalled)
-    ipcRenderer.removeListener('plugin-manager:error', this.onError)
+    window.ipcRenderer().removeListener('plugin-manager:plugin-installed', this.onPluginInstalled)
+    window.ipcRenderer().removeListener('plugin-manager:error', this.onError)
   },
 
   methods: {
@@ -553,7 +553,7 @@ export default {
     },
 
     onDownload (source) {
-      ipcRenderer.send('plugin-manager:download', {
+      window.ipcRenderer().send('plugin-manager:download', {
         url: source
       })
     },
@@ -563,7 +563,7 @@ export default {
 
       const installedPlugin = this.$store.getters['plugin/installedById'](this.selectedPlugin.id)
 
-      ipcRenderer.send('plugin-manager:install', {
+      window.ipcRenderer().send('plugin-manager:install', {
         pluginId: this.selectedPlugin.id,
         pluginPath: installedPlugin ? installedPlugin.fullPath : null
       })

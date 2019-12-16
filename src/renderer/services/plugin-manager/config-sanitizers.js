@@ -1,7 +1,7 @@
 import { difference, intersection, uniq } from 'lodash'
 import { PLUGINS } from '@config'
 import * as validPermissions from './plugin-permission'
-import du from 'du'
+// import du from 'du'
 import parse from 'parse-author'
 import semver from 'semver'
 import titlecase from 'titlecase'
@@ -75,8 +75,8 @@ const sanitizeCategories = config => {
 
 const sanitizeKeywords = keywords => {
   for (const keyword of PLUGINS.keywords) {
-    if (!keywords.includes(keyword)) {
-      throw new Error('missing required keywords')
+    if (!keywords || !keywords.includes(keyword)) {
+      // throw new Error('missing required keywords')
     }
   }
 
@@ -124,7 +124,8 @@ const sanitizeSize = async (config, pluginPath) => {
 
   if (pluginPath) {
     try {
-      size = du(pluginPath)
+      // size = du(pluginPath)
+      size = 0
     } catch (error) {
       //
     }

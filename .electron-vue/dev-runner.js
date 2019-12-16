@@ -43,6 +43,37 @@ function startRenderer () {
     rendererConfig.entry.renderer = [path.join(__dirname, 'dev-client')].concat(rendererConfig.entry.renderer)
     rendererConfig.mode = 'development'
     const compiler = webpack(rendererConfig)
+
+    // compiler.hooks.watchRun.tapAsync('watch-run', (compilation, done) => {
+    //   logStats('Renderer', chalk.white.bold('compiling...'))
+    //   // hotMiddleware.publish({ action: 'compiling' })
+    //   done()
+    // })
+
+    // compiler.watch({}, (err, stats) => {
+    //   if (err) {
+    //     console.log(err)
+    //     return
+    //   }
+
+    //   logStats('Renderer', stats)
+
+    //   // if (electronProcess && electronProcess.kill) {
+    //   //   manualRestart = true
+    //   //   process.kill(electronProcess.pid)
+    //   //   electronProcess = null
+    //   //   startElectron()
+
+    //   //   setTimeout(() => {
+    //   //     manualRestart = false
+    //   //   }, 5000)
+    //   // }
+
+    //   resolve()
+    // })
+
+    //
+
     hotMiddleware = webpackHotMiddleware(compiler, {
       log: false,
       heartbeat: 2500

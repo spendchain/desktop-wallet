@@ -1,4 +1,4 @@
-import logger from 'electron-log'
+// import logger from 'electron-log'
 
 export default {
   computed: {
@@ -17,7 +17,7 @@ export default {
         return pluginThemes[theme].darkMode
       }
 
-      logger.error(`Theme "${theme}" was not found`)
+      window.logger.error(`Theme "${theme}" was not found`)
 
       // Fallback to the `light` theme
       return false

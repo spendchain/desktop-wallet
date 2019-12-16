@@ -1,9 +1,8 @@
-import fs from 'fs'
 import path from 'path'
 import { PluginComponentSandbox } from '../plugin-component-sandbox'
 
-export function create (plugin, pluginObject, sandbox, vue) {
-  return () => {
+export function create (app, plugin, pluginObject, sandbox, vue) {
+  return async () => {
     if (!Object.prototype.hasOwnProperty.call(pluginObject, 'getComponentPaths')) {
       return
     }
@@ -13,7 +12,7 @@ export function create (plugin, pluginObject, sandbox, vue) {
 
     for (const componentName of Object.keys(pluginComponents)) {
       const fullPath = path.join(plugin.fullPath, 'src', pluginComponents[componentName])
-      const source = fs.readFileSync(fullPath)
+      const source = (await app.fs_readFileSync(fullPath))
 
       if (source) {
         const component = new PluginComponentSandbox({

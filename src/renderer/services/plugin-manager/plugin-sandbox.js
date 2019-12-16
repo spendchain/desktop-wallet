@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import path from 'path'
 import { castArray } from 'lodash'
-import { NodeVM } from 'vm2'
+// import { NodeVM } from 'vm2'
 import {
   HTTP,
   MESSAGING,
@@ -45,7 +45,7 @@ export class PluginSandbox {
 
   // Robust VM with relative module resolution and properties implemented by permission
   getComponentVM () {
-    return new NodeVM({
+    return window.createVmSandbox({
       sandbox: {
         ...this.sandbox,
         walletApi: this.walletApi
@@ -68,7 +68,7 @@ export class PluginSandbox {
   getPluginVM () {
     const { rootPath } = this.plugin
 
-    return new NodeVM({
+    return window.createVmSandbox({
       sandbox: {
         document
       },

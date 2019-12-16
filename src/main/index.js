@@ -1,21 +1,28 @@
 'use strict'
 
 import { app, BrowserWindow, ipcMain, screen } from 'electron'
+import { setupBip38Routes } from './server/bip38'
+import { setupFsRoutes } from './server/fs'
+import { setupLedgerRoutes } from './server/ledger'
+import { setupMiscRoutes } from './server/misc'
 import { setupPluginManager } from './plugin-manager'
 import { setupUpdater } from './updater'
+// import logger from 'electron-log'
 import winState from 'electron-window-state'
 import packageJson from '../../package.json'
+import Hapi from '@hapi/hapi'
+// import HapiBoom from '@hapi/boom'
 
 // It is necessary to require `electron-log` here to use it on the renderer process
-require('electron-log')
+// require('electron-log')
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
-if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
-}
+// if (process.env.NODE_ENV !== 'development') {
+//   // global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+// }
 
 // To E2E tests
 if (process.env.TEMP_USER_DATA === 'true') {
@@ -23,6 +30,25 @@ if (process.env.TEMP_USER_DATA === 'true') {
   const tempDirectory = tempy.directory()
   app.setPath('userData', tempDirectory)
 }
+
+const backendServer = Hapi.server({
+  host: 'localhost',
+  port: process.env.API_PORT || 9081,
+  routes: {
+    cors: true
+  }
+})
+
+backendServer.ext('onPreResponse', (request, h) => {
+  const response = request.response
+  if (!response.isBoom) {
+    return h.continue
+  }
+
+  response.output.payload.message = (response.error ? response.error.message : response.message) || response.output.payload.message
+
+  return h.continue
+})
 
 let mainWindow = null
 let deeplinkingUrl = null
@@ -47,7 +73,7 @@ function createWindow () {
     center: true,
     show: false,
     webPreferences: {
-      nodeIntegration: true,
+      preload: require('path').join(app.getAppPath(), '../../static/preload.js'),
       webviewTag: true
     }
   })
@@ -141,16 +167,50 @@ if (!gotTheLock) {
   }
 }
 
-app.on('ready', () => {
+process.on('SIGINT', function () {
+  console.log('sigint')
+  try {
+    // mainWindow.close()
+    backendServer.stop({ timeout: 1000 })
+    app.quit()
+  } catch (error) {
+    console.error(error)
+    // logger.error(error)
+  }
+  // backendServer.stop({ timeout: 1000 })
+  // .then(function (err) {
+  //   process.exit((err) ? 1 : 0)
+  // })
+})
+
+app.on('ready', async () => {
   createWindow()
   setupPluginManager({ sendToWindow, mainWindow, ipcMain })
   setupUpdater({ sendToWindow, ipcMain })
+  setupBip38Routes(backendServer)
+  setupFsRoutes(backendServer)
+  setupLedgerRoutes(backendServer)
+  setupMiscRoutes(backendServer)
+
+  await backendServer.start()
 })
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  console.log('window-all-closed')
+  // if (process.platform !== 'darwin') {
+  try {
+    backendServer.stop({ timeout: 1000 })
     app.quit()
+  } catch (error) {
+    console.error(error)
+    // logger.error(error)
   }
+  // }
+
+  // backendServer.stop({ timeout: 1000 })
+  // .then(function (err) {
+  //   process.exit((err) ? 1 : 0)
+  // })
 })
 
 app.on('activate', () => {

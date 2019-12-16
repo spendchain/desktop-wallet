@@ -1,4 +1,4 @@
-import logger from 'electron-log'
+// import logger from 'electron-log'
 import semver from 'semver'
 import { isFunction } from 'lodash'
 
@@ -47,7 +47,7 @@ export default class VuexMigrations {
   apply () {
     this.migrations.forEach(migration => {
       if (process.env.NODE_ENV !== 'test') {
-        logger.info(`Applying migration ${migration.version}: ${migration.title}`)
+        window.logger.info(`Applying migration ${migration.version}: ${migration.title}`)
       }
       migration.handler(this.store)
     })

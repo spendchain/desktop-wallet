@@ -102,7 +102,6 @@
 
 <script>
 import '@/styles/style.css'
-import fs from 'fs'
 import CleanCss from 'clean-css'
 import { pull, uniq } from 'lodash'
 import { AppFooter, AppIntro, AppSidemenu } from '@/components/App'
@@ -111,8 +110,10 @@ import { TransactionModal } from '@/components/Transaction'
 import config from '@config'
 import URIHandler from '@/services/uri-handler'
 
-var { remote, ipcRenderer } = require('electron')
-const Menu = remote.Menu
+// var { remote, ipcRenderer } = require('electron')
+// const Menu = remote.Menu
+
+// const pluginPath = process.env.NODE_ENV !== 'development' ? config.PLUGINS.path : config.PLUGINS.devPath
 
 export default {
   name: 'DesktopWallet',
@@ -207,7 +208,7 @@ export default {
   watch: {
     hasScreenshotProtection (value) {
       if (this.isScreenshotProtectionEnabled) {
-        remote.getCurrentWindow().setContentProtection(value)
+        window.setContentProtection(value)
       }
     },
     routeComponent (value) {
@@ -296,7 +297,7 @@ export default {
      * @return {void}
      */
     async loadNotEssential () {
-      ipcRenderer.send('updater:check-for-updates')
+      window.ipcRenderer().send('updater:check-for-updates')
       await this.$store.dispatch('peer/refresh')
       this.$store.dispatch('peer/connectToBest', {})
 
@@ -328,7 +329,7 @@ export default {
     },
 
     __watchProcessURL () {
-      ipcRenderer.on('process-url', (_, url) => {
+      window.ipcRenderer().on('process-url', (_, url) => {
         const uri = new URIHandler(url)
 
         if (!uri.validate()) {
@@ -338,7 +339,7 @@ export default {
         }
       })
 
-      ipcRenderer.on('updater:update-available', (_, data) => {
+      window.ipcRenderer().on('updater:update-available', (_, data) => {
         this.$store.dispatch('updater/setAvailableRelease', data)
       })
     },
@@ -364,13 +365,13 @@ export default {
 
     // Enable contextmenu (right click) on input / textarea fields
     setContextMenu () {
-      const InputMenu = Menu.buildFromTemplate([
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        { type: 'separator' },
-        { role: 'selectall' }
-      ])
+      // const InputMenu = Menu.buildFromTemplate([
+      //   { role: 'cut' },
+      //   { role: 'copy' },
+      //   { role: 'paste' },
+      //   { type: 'separator' },
+      //   { role: 'selectall' }
+      // ])
 
       document.body.addEventListener('contextmenu', (e) => {
         e.preventDefault()
@@ -380,7 +381,8 @@ export default {
 
         while (node) {
           if (node.nodeName.match(/^(input|textarea)$/i) || node.isContentEditable) {
-            InputMenu.popup(remote.getCurrentWindow())
+            window.openContextMenu()
+            // InputMenu.popup(remote.getCurrentWindow())
             break
           }
           node = node.parentNode
@@ -393,12 +395,14 @@ export default {
      * (https://webpack.js.org/guides/dependency-management/#require-context), so,
      * instead of that, those assets are loaded manually and then injected directly on the DOM.
      */
-    applyPluginTheme (themeName) {
+    async applyPluginTheme (themeName) {
       if (themeName && this.pluginThemes) {
         const theme = this.pluginThemes[themeName]
         if (theme) {
           const $style = document.querySelector('style[name=plugins]')
-          const input = fs.readFileSync(theme.cssPath)
+          // console.log('applyPluginTheme', `${pluginPath}/${theme.cssPath}`)
+          // const input = (await this.fs_readFileSync(`${pluginPath}/${theme.cssPath}`)).toString()
+          const input = (await this.fs_readFileSync(theme.cssPath)).toString()
           const output = new CleanCss().minify(input)
           $style.innerHTML = output.styles
         }

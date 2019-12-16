@@ -21,7 +21,55 @@ const { VueLoaderPlugin } = require('vue-loader')
  * that provide pure *.vue files that need compiling
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/webpack-configurations.html#white-listing-externals
  */
-let whiteListedModules = ['vue', 'portal-vue', '@arkecosystem/client', 'got', '@arkecosystem/peers']
+let whiteListedModules = [
+  'electron-log',
+  'vue',
+  'vuex',
+  'vuex-persist',
+  'vue-router',
+  'localforage',
+  'chart.js',
+  'vue-chartjs',
+  'vue-vuelidate-jsonschema',
+  'vuelidate',
+  'vue-good-table',
+  'v-tooltip',
+  'portal-vue',
+  'dayjs',
+  'moment',
+  'ky',
+  'semver',
+  'mersenne-twister',
+  'color',
+  'bignumber.js',
+  'got',
+  'vue-qrcode-reader',
+  'emittery',
+  'lodash',
+  'cycled',
+  'bip39',
+  'bs58check',
+  'wif',
+  'trunc-html',
+  'jsonschema',
+  'package-json',
+  'trash',
+  'du',
+  'parse-author',
+  'titlecase',
+  'pretty-bytes',
+  'validate-npm-package-name',
+  'vue-freezeframe',
+  'clean-css',
+  '@fortawesome/vue-fontawesome',
+  '@arkecosystem/client',
+  '@arkecosystem/peers',
+  '@arkecosystem/crypto',
+  '@arkecosystem/ledger-transport',
+  '@ledgerhq/hw-transport-node-hid-singleton'
+]
+
+console.log(Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d)))
 
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',
@@ -133,7 +181,9 @@ let rendererConfig = {
   },
   node: {
     __dirname: process.env.NODE_ENV !== 'production',
-    __filename: process.env.NODE_ENV !== 'production'
+    __filename: process.env.NODE_ENV !== 'production',
+    net: 'empty',
+    fs: 'empty'
   },
   plugins: [
     new VueLoaderPlugin(),
@@ -156,7 +206,7 @@ let rendererConfig = {
   ],
   output: {
     filename: '[name].js',
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'window',
     path: path.join(__dirname, '../dist/electron')
   },
   resolve: {
@@ -166,12 +216,11 @@ let rendererConfig = {
       '@package.json': path.join(__dirname, '../package.json'),
       '@config': path.join(__dirname, '../config'),
       '@tests': path.join(__dirname, '../__tests__'),
-      'vue$': 'vue/dist/vue.esm.js',
-      'got$': path.join(__dirname, '../src/renderer/plugins/got.js')
+      'vue$': 'vue/dist/vue.esm.browser.js'
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node']
   },
-  target: 'electron-renderer'
+  target: 'web'
 }
 
 /**

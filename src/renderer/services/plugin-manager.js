@@ -2,13 +2,10 @@ import * as adapters from '@/services/plugin-manager/adapters'
 import releaseService from '@/services/release'
 import { PLUGINS } from '@config'
 import dayjs from 'dayjs'
-import * as fs from 'fs'
-import * as fsExtra from 'fs-extra'
-import got from 'got'
+import ky from 'ky'
 import { partition, upperFirst } from 'lodash'
 import * as path from 'path'
 import semver from 'semver'
-import trash from 'trash'
 import * as errors from './plugin-manager/errors'
 import { Plugin } from './plugin-manager/plugin'
 import { PluginConfiguration } from './plugin-manager/plugin-configuration'
@@ -49,6 +46,7 @@ export class PluginManager {
     this.setApp(app)
 
     this.pluginsPath = process.env.NODE_ENV !== 'development' ? PLUGINS.path : PLUGINS.devPath
+    this.pluginsPath = `${await app.fs_getHomeDir()}${this.pluginsPath}`
 
     await this.app.$store.dispatch('plugin/reset')
     await this.fetchPlugins()
@@ -69,14 +67,14 @@ export class PluginManager {
     }
 
     const parentDir = path.dirname(plugin.fullPath)
-    const pluginCount = fs.readdirSync(parentDir).filter(entry => {
+    const pluginCount = (await this.app.fs_readdirSync(parentDir)).directories.filter(entry => {
       return !entry.startsWith('.')
     }).length
 
     if (parentDir !== this.pluginsPath && pluginCount === 1) {
-      await trash(parentDir)
+      await this.app.fs_trash(parentDir)
     } else {
-      await trash(plugin.fullPath)
+      await this.app.fs_trash(plugin.fullPath)
     }
 
     this.app.$store.dispatch('plugin/deleteInstalled', plugin.config.id)
@@ -116,6 +114,7 @@ export class PluginManager {
     await sandbox.install()
 
     const setup = new PluginSetup({
+      app: this.app,
       plugin,
       sandbox,
       profileId,
@@ -189,17 +188,35 @@ export class PluginManager {
   }
 
   async fetchLogo (url) {
-    const { body } = await got(url, { encoding: null })
-    return body.toString('base64')
+    const response = await fetch(new Request(url), {
+      method: 'GET',
+      cache: 'default'
+    })
+
+    const buffer = await response.arrayBuffer()
+
+    let image = ''
+    for (const byte of new Uint8Array(buffer)) {
+      image += String.fromCharCode(byte)
+    }
+
+    if (!image) {
+      return ''
+    }
+
+    return btoa(image)
   }
 
   async fetchPluginsFromAdapter () {
+    console.log('fetchPluginsFromAdapter')
     const sessionAdapter = this.app.$store.getters['session/pluginAdapter']
     if (this.adapter !== sessionAdapter) {
       this.setAdapter(sessionAdapter)
     }
 
-    let configs = await this.adapter.all()
+    console.log('adapter', this.adapter, sessionAdapter)
+
+    let configs = await this.adapter.all(this.app)
 
     configs = await Promise.all(configs.map(async config => {
       const plugin = await PluginConfiguration.sanitize(config)
@@ -245,7 +262,7 @@ export class PluginManager {
     const { owner, repository, branch } = this.parsePluginUrl(url)
 
     const baseUrl = `https://raw.githubusercontent.com/${owner}/${repository}/${branch}`
-    const { body } = await got(`${baseUrl}/package.json`, { json: true })
+    const { body } = await ky(`${baseUrl}/package.json`).json()
 
     let plugin
 
@@ -277,10 +294,10 @@ export class PluginManager {
   }
 
   async fetchPluginsFromPath () {
-    fsExtra.ensureDirSync(this.pluginsPath)
+    await this.app.fs_ensureDirSync(this.pluginsPath)
 
-    const dirs = fsExtra.readdirSync(this.pluginsPath).filter(entry => {
-      return entry !== '.cache' && fsExtra.lstatSync(`${this.pluginsPath}/${entry}`).isDirectory()
+    const dirs = (await this.app.fs_readdirSync(this.pluginsPath)).directories.filter((entry) => {
+      return entry !== '.cache'
     })
 
     const [scoped, unscoped] = partition(dirs, entry => {
@@ -292,9 +309,7 @@ export class PluginManager {
     for (const scope of scoped) {
       const scopePath = `${this.pluginsPath}/${scope}`
 
-      const entries = fs.readdirSync(scopePath).filter(entry => {
-        return fs.lstatSync(`${scopePath}/${entry}`).isDirectory()
-      })
+      const entries = (await this.app.fs_readdirSync(scopePath)).directories
 
       plugins.push(...entries.map(entry => `${scope}/${entry}`))
     }
@@ -312,7 +327,7 @@ export class PluginManager {
 
   async fetchBlacklist () {
     try {
-      const { body } = await got(PLUGINS.blacklistUrl, { json: true })
+      const body = await ky(PLUGINS.blacklistUrl).json()
       this.app.$store.dispatch('plugin/setBlacklisted', { scope: 'global', plugins: body.plugins })
     } catch (error) {
       console.error(`Could not fetch blacklist from '${PLUGINS.blacklistUrl}: ${error.message}`)
@@ -320,27 +335,30 @@ export class PluginManager {
   }
 
   async fetchPlugin (pluginPath, isUpdate = false) {
-    validatePluginPath(pluginPath)
+    await validatePluginPath(this.app, pluginPath)
 
-    const packageJson = JSON.parse(fs.readFileSync(`${pluginPath}/package.json`))
+    const packageJson = JSON.parse((await this.app.fs_readFileSync(`${pluginPath}/package.json`)).toString())
     const pluginConfig = await PluginConfiguration.sanitize(packageJson, pluginPath)
 
     if (this.plugins[pluginConfig.id] && !isUpdate) {
       throw new errors.PluginAlreadyLoadedError(pluginConfig.id)
     }
 
+    const pluginLogo = pluginConfig.logo
+    pluginConfig.logo = null
     try {
-      pluginConfig.logo = fs.readFileSync(`${pluginPath}/logo.png`).toString('base64')
+      pluginConfig.logo = (await this.app.fs_readFileSync(`${pluginPath}/logo.png`)).toString('base64')
     } catch (error) {
       try {
-        pluginConfig.logo = await this.fetchLogo(pluginConfig.logo)
+        if (pluginLogo) {
+          pluginConfig.logo = await this.fetchLogo(pluginLogo)
+        }
       } catch (error) {
-        pluginConfig.logo = null
+        //
       }
     }
 
     const fullPath = pluginPath.substring(0, 1) === '/' ? pluginPath : path.resolve(pluginPath)
-
     await this.app.$store.dispatch('plugin/setInstalled', {
       config: pluginConfig,
       fullPath

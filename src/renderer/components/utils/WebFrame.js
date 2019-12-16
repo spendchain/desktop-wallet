@@ -1,5 +1,5 @@
 import { URL } from 'url'
-import logger from 'electron-log'
+// import logger from 'electron-log'
 import path from 'path'
 
 const allowedProtocols = [
@@ -17,11 +17,11 @@ const isValidURL = (input) => {
     const uri = new URL(input)
     const isAllowed = allowedProtocols.includes(uri.protocol)
     if (!isAllowed) {
-      logger.error('[webframe]: Protocol not allowed.')
+      window.logger.error('[webframe]: Protocol not allowed.')
     }
     return isAllowed
   } catch {
-    logger.error(`[webframe]: Invalid url. Make sure to set the protocol (${allowedProtocols.join(',')}).`)
+    window.logger.error(`[webframe]: Invalid url. Make sure to set the protocol (${allowedProtocols.join(',')}).`)
     return false
   }
 }
@@ -66,9 +66,9 @@ export default {
         'console-message': event => {
           const message = typeof event.message !== 'string' ? JSON.stringify(event.message) : event.message
           if (event.level === 2) {
-            logger.error('[webframe log]:', message)
+            window.logger.error('[webframe log]:', message)
           } else {
-            logger.log('[webframe log]:', message)
+            window.logger.log('[webframe log]:', message)
           }
         },
 

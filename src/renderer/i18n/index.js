@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueI18n from 'vue-i18n'
+import VueI18n from 'vue-i18n/dist/vue-i18n.esm.browser.js'
 import { I18N } from '@config'
 
 Vue.use(VueI18n)

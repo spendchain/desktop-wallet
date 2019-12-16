@@ -67,9 +67,13 @@ class LedgerService {
       if (this.transport) {
         await this.transport.close()
       }
+
+      return true
     } catch (error) {
       logger.error(error)
     }
+
+    return false
   }
 
   /**
@@ -78,7 +82,7 @@ class LedgerService {
    */
   async isConnected () {
     try {
-      if (!this.transport || this.transport.disconnected) {
+      if (!this.transport || (this.transport && this.transport.disconnected)) {
         return false
       }
 
@@ -97,21 +101,10 @@ class LedgerService {
 
   /**
    * Get address and public key from ledger wallet.
-   * @param  {Number} [path] Path for wallet location.
+   * @param  {Number} obj.path Path for wallet location.
    * @return {(String|Boolean)}
    */
-  async getWallet (path) {
-    return this.__performAction(async () => {
-      return this.ledger.getAddress(path)
-    })
-  }
-
-  /**
-   * Get public key from ledger wallet.
-   * @param  {Number} [path] Path for wallet location.
-   * @return {(String|Boolean)}
-   */
-  async getPublicKey (path) {
+  async getWallet ({ path }) {
     return this.__performAction(async () => {
       return this.ledger.getAddress(path)
     })
@@ -119,11 +112,11 @@ class LedgerService {
 
   /**
    * Sign transaction for ledger wallet.
-   * @param  {Number} [path] Path for wallet location.
-   * @param  {String} transactionHex Hex of transaction.
+   * @param  {Number} obj.path Path for wallet location.
+   * @param  {String} obj.transactionHex Hex of transaction.
    * @return {(String|Boolean)}
    */
-  async signTransaction (path, transactionHex) {
+  async signTransaction ({ path, transactionHex }) {
     return this.__performAction(async () => {
       return this.ledger.signTransaction(path, transactionHex)
     })

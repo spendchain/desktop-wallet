@@ -2,10 +2,13 @@ import merge from 'lodash/merge'
 
 const mixins = [
   require('./assets').default,
+  require('./bip38').default,
   require('./collections').default,
   require('./currency').default,
   require('./electron').default,
   require('./formatter').default,
+  require('./fs').default,
+  require('./misc').default,
   require('./network').default,
   require('./qr').default,
   require('./session').default,

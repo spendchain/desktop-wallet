@@ -1,10 +1,10 @@
-import got from 'got'
+import ky from 'ky'
 import { MARKET } from '@config'
 import i18n from '@/i18n'
 import alertEvents from '@/plugins/alert-events'
 import dayjs from 'dayjs'
 import { capitalize, keys, min, max } from 'lodash'
-import logger from 'electron-log'
+// import logger from 'electron-log'
 
 class CryptoCompare {
   /**
@@ -20,12 +20,12 @@ class CryptoCompare {
 
     try {
       const uri = `${MARKET.source.baseUrl}/data/pricemultifull`
-      const response = await got(uri, { query, json: true })
-      const data = response.body.RAW && response.body.RAW[token] ? response.body.RAW[token] : {}
+      const response = await ky(uri, { searchParams: query }).json()
+      const data = response.RAW && response.RAW[token] ? response.RAW[token] : {}
 
       return this.__transformMarketResponse(data)
     } catch (error) {
-      logger.error(error)
+      window.logger.error(error)
       alertEvents.$error(i18n.t('COMMON.FAILED_FETCH', {
         name: i18n.t('MARKET.MARKET'),
         msg: error.message
@@ -108,8 +108,8 @@ class CryptoCompare {
 
     try {
       const uri = `${MARKET.source.baseUrl}/data/price`
-      const response = await got(uri, { query, json: true })
-      return !!response.body.BTC
+      const response = await ky(uri, { searchParams: query }).json()
+      return !!response.BTC
     } catch (error) {
       return null
     }
@@ -135,10 +135,10 @@ class CryptoCompare {
     }
 
     try {
-      const response = await got(uri, { query, json: true })
-      return this.__transformHistoricalResponse(response.body.Data, dateFormat)
+      const response = await ky(uri, { searchParams: query }).json()
+      return this.__transformHistoricalResponse(response.Data, dateFormat)
     } catch (error) {
-      logger.error(error)
+      window.logger.error(error)
       alertEvents.$error(i18n.t('COMMON.FAILED_FETCH', {
         name: i18n.t('MARKET.HISTORICAL_DATA'),
         msg: error.message

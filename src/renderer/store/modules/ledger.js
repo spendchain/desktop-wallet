@@ -1,10 +1,10 @@
 import cryptoLibrary from 'crypto'
 import { keyBy } from 'lodash'
-import logger from 'electron-log'
+// import logger from 'electron-log'
 import Vue from 'vue'
 import { Identities } from '@arkecosystem/crypto'
 import eventBus from '@/plugins/event-bus'
-import ledgerService from '@/services/ledger-service'
+import ledgerService from '@/services/ledger'
 
 export default {
   namespaced: true,
@@ -175,10 +175,10 @@ export default {
      * @param  {Number} [obj.delay=2000] Delay in between connection attempts.
      * @return {void}
      */
-    async ensureConnection ({ commit, state, dispatch }, { delay } = { delay: 2000 }) {
+    async ensureConnection ({ commit, state, dispatch }, { delay } = { delay: 5000 }) {
       if (state.isConnected && !await dispatch('checkConnected')) {
         await dispatch('disconnect')
-        delay = 2000
+        delay = 5000
       }
 
       if (!state.isConnected) {
@@ -288,7 +288,7 @@ export default {
             try {
               walletData = [await this._vm.$client.fetchWallet(ledgerWallets[0].address)]
             } catch (error) {
-              logger.error(error)
+              window.logger.error(error)
               const message = error.response ? error.response.body.message : error.message
               if (message !== 'Wallet not found') {
                 throw error
@@ -331,7 +331,7 @@ export default {
           }
         }
       } catch (error) {
-        logger.error(error)
+        window.logger.error(error)
       }
 
       if (getters.shouldStopLoading(processId)) {
@@ -404,7 +404,7 @@ export default {
           accountIndex
         })
       } catch (error) {
-        logger.error(error)
+        window.logger.error(error)
         throw new Error(`Could not get wallet: ${error}`)
       }
     },
@@ -421,7 +421,7 @@ export default {
           accountIndex
         })
       } catch (error) {
-        logger.error(error)
+        window.logger.error(error)
         throw new Error(`Could not get address: ${error}`)
       }
     },
@@ -438,7 +438,7 @@ export default {
           accountIndex
         })
       } catch (error) {
-        logger.error(error)
+        window.logger.error(error)
         throw new Error(`Could not get public key: ${error}`)
       }
     },
@@ -458,7 +458,7 @@ export default {
           data: transactionHex
         })
       } catch (error) {
-        logger.error(error)
+        window.logger.error(error)
         throw new Error(`Could not sign transaction: ${error}`)
       }
     },
@@ -486,7 +486,7 @@ export default {
       const path = `44'/${state.slip44}'/${accountIndex || 0}'/0/0`
       const actions = {
         async getWallet () {
-          const { publicKey } = await ledgerService.getWallet(path)
+          const { publicKey } = await ledgerService.getWallet({ path })
           const network = rootGetters['session/network']
 
           return {
@@ -495,16 +495,16 @@ export default {
           }
         },
         async getAddress () {
-          const { publicKey } = await ledgerService.getWallet(path)
+          const { publicKey } = await ledgerService.getWallet({ path })
           const network = rootGetters['session/network']
 
           return Identities.Address.fromPublicKey(publicKey, network.version)
         },
         async getPublicKey () {
-          return (await ledgerService.getWallet(path)).publicKey
+          return (await ledgerService.getWallet({ path })).publicKey
         },
         async signTransaction () {
-          return (await ledgerService.signTransaction(path, data)).signature
+          return (await ledgerService.signTransaction({ path, data })).signature
         }
       }
 

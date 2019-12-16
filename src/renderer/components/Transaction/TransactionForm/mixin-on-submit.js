@@ -1,5 +1,3 @@
-import Bip38 from '@/services/bip38'
-
 export default {
   methods: {
     /**
@@ -15,15 +13,12 @@ export default {
           wif: this.walletNetwork.wif
         }
 
-        const bip38 = new Bip38()
         try {
-          const { encodedWif } = await bip38.decrypt(dataToDecrypt)
+          const { encodedWif } = await this.bip38_decrypt(dataToDecrypt)
           this.form.passphrase = null
           this.form.wif = encodedWif
         } catch (_error) {
           this.$error(this.$t('ENCRYPTION.FAILED_DECRYPT'))
-        } finally {
-          bip38.quit()
         }
 
         this.showEncryptLoader = false

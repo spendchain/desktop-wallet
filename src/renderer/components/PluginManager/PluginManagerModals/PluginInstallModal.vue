@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { ipcRenderer } from 'electron'
+// import { ipcRenderer } from 'electron'
 import { ModalWindow } from '@/components/Modal'
 import { ProgressBar } from '@/components/ProgressBar'
 
@@ -130,27 +130,27 @@ export default {
   },
 
   mounted () {
-    ipcRenderer.on('plugin-manager:download-progress', this.onProgress)
-    ipcRenderer.on('plugin-manager:plugin-downloaded', this.onPluginDownloaded)
-    ipcRenderer.on('plugin-manager:error', this.onError)
+    window.ipcRenderer().on('plugin-manager:download-progress', this.onProgress)
+    window.ipcRenderer().on('plugin-manager:plugin-downloaded', this.onPluginDownloaded)
+    window.ipcRenderer().on('plugin-manager:error', this.onError)
 
     this.emitDownload()
   },
 
   beforeDestroy () {
-    ipcRenderer.removeListener('plugin-manager:download-progress', this.onProgress)
-    ipcRenderer.removeListener('plugin-manager:plugin-downloaded', this.onPluginDownloaded)
-    ipcRenderer.removeListener('plugin-manager:error', this.onError)
+    window.ipcRenderer().removeListener('plugin-manager:download-progress', this.onProgress)
+    window.ipcRenderer().removeListener('plugin-manager:plugin-downloaded', this.onPluginDownloaded)
+    window.ipcRenderer().removeListener('plugin-manager:error', this.onError)
   },
 
   methods: {
     cancel () {
       this.isDownloadCancelled = true
-      ipcRenderer.send('plugin-manager:cancel')
+      window.ipcRenderer().send('plugin-manager:cancel')
     },
 
     cleanup () {
-      ipcRenderer.send('plugin-manager:cleanup')
+      window.ipcRenderer().send('plugin-manager:cleanup')
     },
 
     emitDownload () {

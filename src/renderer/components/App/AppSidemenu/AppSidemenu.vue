@@ -148,7 +148,7 @@ import { MenuNavigation, MenuNavigationItem } from '@/components/Menu'
 import { ProfileAvatar } from '@/components/Profile'
 import SvgIcon from '@/components/SvgIcon'
 
-var { ipcRenderer } = require('electron')
+// var { ipcRenderer } = require('electron')
 
 export default {
   name: 'AppSidemenu',
@@ -202,7 +202,7 @@ export default {
   },
 
   created () {
-    ipcRenderer.on('app:preferences', () => {
+    window.ipcRenderer().on('app:preferences', () => {
       this.$refs.settings.showSettings()
     })
   },

@@ -27,6 +27,7 @@ export function validateComponent ({ plugin, component, name, logger }) {
 
   if (missingKeys.length) {
     componentError(missingKeys.join(', '), 'is missing')
+    console.log('validateComponent', component)
 
     return false
   }

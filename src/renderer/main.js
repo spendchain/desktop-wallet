@@ -4,7 +4,6 @@ import Vuelidate from 'vuelidate'
 import VTooltip from 'v-tooltip'
 import VueGoodTablePlugin from 'vue-good-table'
 import PortalVue from 'portal-vue'
-import logger from 'electron-log'
 
 import App from './App'
 import i18n from './i18n'
@@ -24,7 +23,7 @@ import pluginManager from '@/plugins/plugin-manager'
 Vue.use(pluginManager)
 
 Vue.config.productionTip = false
-Vue.logger = Vue.prototype.$logger = logger
+Vue.logger = Vue.prototype.$logger = window.logger
 Vue.prototype.$eventBus = eventBus
 
 Vue.use(filters)

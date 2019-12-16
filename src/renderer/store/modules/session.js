@@ -262,7 +262,7 @@ export default {
       state.unconfirmedVotes = value.unconfirmedVotes
       state.lastFees = value.lastFees
       state.filterBlacklistedPlugins = value.filterBlacklistedPlugins
-      state.pluginAdapter = value.pluginAdapter
+      state.pluginAdapter = value.pluginAdapter || 'npm'
 
       i18n.locale = state.language
     }

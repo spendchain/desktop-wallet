@@ -1,4 +1,5 @@
 import { Alert } from "app/components/Alert";
+import { Slider } from "app/components/Slider";
 import React from "react";
 
 type Props = {
@@ -19,11 +20,25 @@ export const PluginInfo = ({ about, permissions, screenshots }: Props) => (
 		</div>
 		<div className="mt-10 relative">
 			<p className="font-bold">Screenshots</p>
-			<p className="absolute top-0 right-0">Pagination</p>
-			<div className="mt-3 flex space-x-4 pb-10">
-				{screenshots.map((screenshot, idx) => (
-					<div key={idx} className="rounded-lg w-1/3 h-56 bg-theme-neutral-500" />
-				))}
+			<div className="absolute top-0 right-0 pr-4 flex space-x-3 screenshots-pagination" />
+			<div className="pb-10">
+				<Slider
+					data={[screenshots, screenshots, screenshots]}
+					options={{
+						pagination: {
+							el: ".screenshots-pagination",
+							clickable: true,
+						},
+					}}
+				>
+					{(screenshotGroup: any) => (
+						<div className="mt-3 flex space-x-4 pb-10 mr-3">
+							{screenshotGroup.map((screenshot, idx) => (
+								<div key={idx} className="rounded-lg w-1/3 h-56 bg-theme-neutral-500" />
+							))}
+						</div>
+					)}
+				</Slider>
 			</div>
 			<div className="pb-10">
 				<Alert variant="warning" title="Disclaimer">

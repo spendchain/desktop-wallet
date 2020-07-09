@@ -1,34 +1,12 @@
 import { Breadcrumbs } from "app/components/Breadcrumbs";
-import { Table } from "app/components/Table";
-import { TransactionListItem } from "app/components/TransactionListItem";
-import { TransactionListItemProps } from "app/components/TransactionListItem/models";
 import { WalletListItemProps } from "app/components/WalletListItem";
+import { TransactionTable } from "domains/transaction/components/TransactionTable";
+import { Transaction } from "domains/transaction/components/TransactionTable/TransactionTable.models";
 import { WalletBottomSheetMenu } from "domains/wallet/components/WalletBottomSheetMenu";
 import { WalletHeader } from "domains/wallet/components/WalletHeader/WalletHeader";
 import { WalletRegistrations } from "domains/wallet/components/WalletRegistrations";
 import { WalletVote } from "domains/wallet/components/WalletVote";
 import React from "react";
-
-const columns = [
-	{
-		Header: "Date",
-	},
-	{
-		Header: "Type",
-		className: "invisible",
-	},
-	{
-		Header: "Wallet Address",
-	},
-	{
-		Header: "Amount",
-		className: "float-right",
-	},
-	{
-		Header: "Fiat Value",
-		className: "float-right",
-	},
-];
 
 const Divider = () => <div className="h-4 bg-theme-neutral-100" />;
 
@@ -37,8 +15,8 @@ type Wallet = WalletListItemProps & {
 	balance: string;
 	publicKey?: string;
 	hasStarred?: boolean;
-	transactions?: TransactionListItemProps[];
-	pendingTransactions?: TransactionListItemProps[];
+	transactions?: Transaction[];
+	pendingTransactions?: Transaction[];
 	delegates: {
 		username: string;
 		address: string;
@@ -97,15 +75,11 @@ export const WalletDetails = ({ wallet, wallets }: Props) => {
 
 			<div className="px-12 py-8">
 				<h2 className="font-bold">Pending Transactions</h2>
-				<Table columns={columns} data={wallet.pendingTransactions}>
-					{(rowData: any) => <TransactionListItem {...rowData} />}
-				</Table>
+				<TransactionTable transactions={wallet.pendingTransactions!} showSignColumn />
 			</div>
 			<div className="px-12 pt-4 pb-20">
 				<h2 className="font-bold">Transaction History</h2>
-				<Table columns={columns} data={wallet.transactions}>
-					{(rowData: any) => <TransactionListItem {...rowData} />}
-				</Table>
+				<TransactionTable transactions={wallet.transactions!} currencyRate="2" />
 			</div>
 
 			<WalletBottomSheetMenu walletsData={wallets!} />

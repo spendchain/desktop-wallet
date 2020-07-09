@@ -1,17 +1,20 @@
 import React from "react";
-import { act, fireEvent, render } from "testing-library";
+import { act, fireEvent } from "testing-library";
+import { renderWithRouter } from "utils/testing-library";
 
 import { balances, portfolioPercentages, transactions, wallets } from "../../data";
 import { Dashboard } from "./Dashboard";
 
 describe("Dashboard", () => {
 	it("should render", () => {
-		const { container } = render(<Dashboard />);
+		const { container } = renderWithRouter(<Dashboard />);
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should hide transaction view", () => {
-		const { getByTestId, getAllByTestId } = render(<Dashboard wallets={wallets} transactions={transactions} />);
+		const { getByTestId, getAllByTestId } = renderWithRouter(
+			<Dashboard wallets={wallets} transactions={transactions} />,
+		);
 		const filterNetwork = getAllByTestId("dropdown__toggle");
 		// const transactionsView = getByTestId("dashboard__transactions-view");
 
@@ -26,17 +29,19 @@ describe("Dashboard", () => {
 	});
 
 	it("should render portfolio percentage bar", () => {
-		const { container } = render(<Dashboard portfolioPercentages={portfolioPercentages} />);
+		const { container } = renderWithRouter(<Dashboard portfolioPercentages={portfolioPercentages} />);
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should render portfolio chart", () => {
-		const { container } = render(<Dashboard balances={balances} portfolioPercentages={portfolioPercentages} />);
+		const { container } = renderWithRouter(
+			<Dashboard balances={balances} portfolioPercentages={portfolioPercentages} />,
+		);
 		expect(container).toMatchSnapshot();
 	});
 
 	it("should hide portfolio view", () => {
-		const { getByTestId, getAllByTestId } = render(
+		const { getByTestId, getAllByTestId } = renderWithRouter(
 			<Dashboard balances={balances} wallets={wallets} transactions={transactions} />,
 		);
 		const filterNetwork = getAllByTestId("dropdown__toggle");

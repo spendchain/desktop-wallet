@@ -1,7 +1,6 @@
 import { Breadcrumbs } from "app/components/Breadcrumbs";
 import { WalletListItemProps } from "app/components/WalletListItem";
-import { TransactionTable } from "domains/transaction/components/TransactionTable";
-import { Transaction } from "domains/transaction/components/TransactionTable/TransactionTable.models";
+import { Transaction, TransactionTable } from "domains/transaction/components/TransactionTable";
 import { WalletBottomSheetMenu } from "domains/wallet/components/WalletBottomSheetMenu";
 import { WalletHeader } from "domains/wallet/components/WalletHeader/WalletHeader";
 import { WalletRegistrations } from "domains/wallet/components/WalletRegistrations";

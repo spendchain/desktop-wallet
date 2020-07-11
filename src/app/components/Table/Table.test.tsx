@@ -57,4 +57,9 @@ describe("Table", () => {
 
 		expect(getByTestId("table__ArrowDown")).toBeTruthy();
 	});
+
+	it("should hide columns", () => {
+		const { queryByTestId } = render(<Table hideColumns columns={columns} data={data} />);
+		expect(queryByTestId("table__thead")).toBeNull();
+	});
 });

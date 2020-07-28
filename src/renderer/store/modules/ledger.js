@@ -641,8 +641,8 @@ export default {
       }
 
       if (slip44Separator) {
-        slip44 = slip44.split(slip44Separator)[0]
         accountIndex = slip44.split(slip44Separator)[1]
+        slip44 = slip44.split(slip44Separator)[0]
       }
 
       const path = `44'/${slip44}'/${accountIndex || 0}'/0/0`

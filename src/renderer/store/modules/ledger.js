@@ -631,7 +631,21 @@ export default {
         }
       }
 
-      const path = `44'/${state.slip44}'/${accountIndex || 0}'/0/0`
+      let slip44 = state.slip44
+      let slip44Separator = null
+
+      if (slip44.includes("'/")) {
+        slip44Separator = "'/"
+      } else if (slip44.includes('/')) {
+        slip44Separator = '/'
+      }
+
+      if (slip44Separator) {
+        slip44 = slip44.split(slip44Separator)[0]
+        accountIndex = slip44.split(slip44Separator)[1]
+      }
+
+      const path = `44'/${slip44}'/${accountIndex || 0}'/0/0`
       const actions = {
         async getWallet () {
           const publicKey = await ledgerService.getPublicKey(path)

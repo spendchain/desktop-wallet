@@ -1,5 +1,6 @@
 import { Environment, Profile, ProfileSetting } from "@arkecosystem/platform-sdk-profiles";
 import { Button } from "app/components/Button";
+import { DeleteResource } from "app/components/DeleteResource";
 import { Form, FormField, FormHelperText, FormLabel } from "app/components/Form";
 import { Header } from "app/components/Header";
 import { Icon } from "app/components/Icon";
@@ -7,11 +8,13 @@ import { Input } from "app/components/Input";
 import { ListDivided } from "app/components/ListDivided";
 import { Select } from "app/components/SelectDropdown";
 import { Toggle } from "app/components/Toggle";
+import { useEnvironmentContext } from "app/contexts";
 import { useActiveProfile } from "app/hooks/env";
 import { PlatformSdkChoices } from "data";
 import { AdvancedMode } from "domains/setting/components/AdvancedMode";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import { openFile, setScreenshotProtection } from "utils/electron-utils";
 
 type GeneralProps = {
@@ -21,8 +24,10 @@ type GeneralProps = {
 	onSubmit: (profile: Profile) => void;
 };
 
-export const General = ({ env, formConfig, onSubmit }: GeneralProps) => {
-	const activeProfile = useActiveProfile()!;
+export const General = ({ formConfig, onSubmit }: GeneralProps) => {
+	const { env, persist } = useEnvironmentContext();
+	const activeProfile = useActiveProfile();
+	const history = useHistory();
 	const { t } = useTranslation();
 
 	const { context, register } = formConfig;
@@ -33,6 +38,16 @@ export const General = ({ env, formConfig, onSubmit }: GeneralProps) => {
 	const [isAdvancedMode, setIsAdvancedMode] = useState(
 		activeProfile.settings().get(ProfileSetting.AdvancedMode) || false,
 	);
+	const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+	const closeResetModal = () => setIsResetModalOpen(false);
+
+	const handleResetModal = async () => {
+		closeResetModal();
+		activeProfile.flush();
+		// TODO ?
+		// history.push("/");
+		// await persist();
+	};
 
 	const handleChangeAvatar = async () => {
 		const raw = await openFile(null, {
@@ -385,7 +400,7 @@ export const General = ({ env, formConfig, onSubmit }: GeneralProps) => {
 				</div>
 
 				<div className="flex justify-between w-full pt-2">
-					<Button color="danger" variant="plain">
+					<Button color="danger" variant="plain" onClick={() => setIsResetModalOpen(true)}>
 						<Icon name="Reset" />
 						<span>{t("COMMON.RESET_DATA")}</span>
 					</Button>
@@ -397,6 +412,15 @@ export const General = ({ env, formConfig, onSubmit }: GeneralProps) => {
 					</div>
 				</div>
 			</Form>
+
+			<DeleteResource
+				title={t("SETTINGS.MODAL_RESET_PROFILE.TITLE")}
+				description={t("SETTINGS.MODAL_RESET_PROFILE.DESCRIPTION")}
+				isOpen={isResetModalOpen}
+				onClose={closeResetModal}
+				onCancel={closeResetModal}
+				onDelete={handleResetModal}
+			/>
 		</>
 	);
 };

@@ -80,6 +80,10 @@ export const translations: { [key: string]: any } = {
 		ADD_PLUGIN: "Add Plugin",
 		OPEN_BLACKLIST: "Open List",
 	},
+	MODAL_RESET_PROFILE: {
+		TITLE: "Reset Profile",
+		DESCRIPTION: "Do you really want to reset this profile? Once reseted, you will not be able to restore it.",
+	},
 	MODAL_ADVANCED_MODE: {
 		TITLE: "Advanced Mode Disclaimer",
 		DISCLAIMER:

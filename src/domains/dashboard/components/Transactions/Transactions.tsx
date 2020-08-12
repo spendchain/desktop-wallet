@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 type TransactionsProps = {
 	title: string;
 	transactions: Contracts.TransactionDataType[];
-	fetchMoreAction: Function;
-	moreAction?: any;
+	fetchMoreAction?: Function;
+	onRowClick?: any;
 	emptyText?: string;
 };
 
-export const Transactions = ({ transactions, title, emptyText, fetchMoreAction }: TransactionsProps) => {
+export const Transactions = ({ transactions, title, emptyText, fetchMoreAction, onRowClick }: TransactionsProps) => {
 	const { t } = useTranslation();
 
 	return (
@@ -20,13 +20,13 @@ export const Transactions = ({ transactions, title, emptyText, fetchMoreAction }
 			<div className="text-4xl font-bold">{title}</div>
 			{transactions.length > 0 && (
 				<div className="pt-8">
-					<TransactionTable transactions={transactions} currencyRate="2" />
+					<TransactionTable transactions={transactions} currencyRate="2" onRowClick={onRowClick} />
 
 					<Button
 						data-testid="transactions__fetch-more-button"
 						variant="plain"
 						className="w-full mt-10 mb-5"
-						onClick={() => fetchMoreAction()}
+						onClick={() => fetchMoreAction && fetchMoreAction()}
 					>
 						{t("COMMON.VIEW_MORE")}
 					</Button>

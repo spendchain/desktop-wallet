@@ -15,6 +15,7 @@ type Props = {
 	currencyRate?: string;
 	isSignaturePending?: boolean;
 	onSign?: () => void;
+	onClick?: () => void;
 	walletName?: string;
 } & React.HTMLProps<any>;
 
@@ -22,11 +23,17 @@ export const TransactionRow = ({
 	currencyRate,
 	transaction,
 	onSign,
+	onClick,
 	walletName,
 	isSignaturePending,
 	...props
 }: Props) => (
-	<tr data-testid="TransactionRow" className="border-b border-dotted border-theme-neutral-300" {...props}>
+	<tr
+		data-testid="TransactionRow"
+		className="border-b border-dotted border-theme-neutral-300 cursor-pointer bg-opacity-10 hover:bg-theme-neutral-100"
+		{...props}
+		onClick={onClick}
+	>
 		<td className="w-16 py-6">
 			<div className="inline-block align-middle">
 				<Link data-testid="TransactionRow__ID" to={{ pathname: "" }} tooltip={transaction.id()} isExternal />

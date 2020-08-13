@@ -57,11 +57,11 @@ const ModalContainer = styled.div<{ size?: Size }>`
 const ModalContent = (props: ModalContentProps) => (
 	<ModalContainer
 		size={props.size}
-		className="absolute top-0 left-0 right-0 z-50 flex flex-col px-10 pt-6 pb-8 mt-24 mx-auto rounded-xl bg-theme-background"
+		className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col pt-6 pb-8 my-24 mx-auto rounded-xl bg-theme-background"
 		data-testid="modal__inner"
 	>
-		<div className="relative">
-			<div className="absolute top-0 right-0 z-50 mt-5 mr-5">
+		<div className="relative flex flex-col h-full">
+			<div className="absolute -top-2 right-0 z-50 mt-5 mr-5">
 				<Button
 					data-testid="modal__close-btn"
 					color="neutral"
@@ -75,7 +75,7 @@ const ModalContent = (props: ModalContentProps) => (
 				</Button>
 			</div>
 
-			<div className="py-4">
+			<div className="py-4 px-10">
 				{props.banner ? (
 					<div className="relative mb-10 -mx-10 -mt-10">
 						{props.banner}
@@ -85,22 +85,18 @@ const ModalContent = (props: ModalContentProps) => (
 				) : (
 					<h2 className="mb-0 text-3xl font-bold">{props.title}</h2>
 				)}
+			</div>
 
-				<div className="flex-1">
-					{props.image}
+			<div className="flex-1 overflow-y-auto px-10">
+				{props.image}
 
-					{props.description && <div className="mt-1 text-theme-neutral-dark">{props.description}</div>}
+				{props.description && <div className="mt-1 text-theme-neutral-dark">{props.description}</div>}
 
-					{props.children}
-				</div>
+				{props.children}
 			</div>
 		</div>
 	</ModalContainer>
 );
-
-interface BodyRightOffset {
-	[key: string]: string;
-}
 
 export const Modal = (props: ModalProps) => {
 	if (!props.isOpen) {
@@ -110,7 +106,7 @@ export const Modal = (props: ModalProps) => {
 	return (
 		<Container>
 			<div
-				className="absolute inset-0 z-50 bg-black opacity-50 overflow-y-auto"
+				className="fixed inset-0 z-50 bg-black opacity-50 overflow-y-auto"
 				data-testid="modal__overlay"
 				onClick={props.onClose}
 			/>

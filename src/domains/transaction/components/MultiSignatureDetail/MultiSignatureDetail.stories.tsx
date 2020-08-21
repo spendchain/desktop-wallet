@@ -1,5 +1,6 @@
 import { boolean } from "@storybook/addon-knobs";
 import React from "react";
+import { TransactionFixture } from "tests/fixtures/transactions";
 
 import { MultiSignatureDetail } from "./MultiSignatureDetail";
 
@@ -9,6 +10,8 @@ export const Default = () => (
 	<MultiSignatureDetail
 		isOpen={boolean("Is Open", true)}
 		onClose={() => alert("closed")}
-		onCancel={() => alert("cancelled")}
+		transaction={TransactionFixture}
+		ticker="BTC"
+		walletAlias="ROBank"
 	/>
 );

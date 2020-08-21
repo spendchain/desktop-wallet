@@ -17,14 +17,26 @@ import { useTranslation } from "react-i18next";
 
 type MultiSignatureDetailProps = {
 	isOpen: boolean;
-	transaction?: any;
+	transaction: any;
+	ticker?: string;
+	walletAlias?: string;
 	onClose?: any;
-	onCancel?: any;
+};
+
+type FirstSetpProps = {
+	transaction: any;
+	walletAlias?: string;
+	ticker?: string;
+};
+
+type SignaturesProps = {
+	signature: string;
+	signatures: string[];
 };
 
 const SuccessBanner = images.common.SuccessBanner;
 
-const Signatures = () => {
+const Signatures = ({ signature, signatures }: SignaturesProps) => {
 	const { t } = useTranslation();
 
 	return (
@@ -36,7 +48,7 @@ const Signatures = () => {
 					<div className="mb-2 text-sm font-semibold text-theme-neutral">{t("COMMON.YOU")}</div>
 
 					<div className="pr-4 mr-2 border-r border-theme-neutral-300">
-						<Avatar address="test" noShadow>
+						<Avatar address={signature} noShadow>
 							<Badge className="bg-theme-success-200 text-theme-success-500" icon="Checkmark" />
 						</Avatar>
 					</div>
@@ -45,21 +57,15 @@ const Signatures = () => {
 				<div>
 					<div className="mb-2 ml-2 text-sm font-semibold text-theme-neutral">{t("COMMON.OTHER")}</div>
 					<div className="flex ml-2 space-x-4">
-						<Avatar address="test" noShadow>
-							<Badge className="bg-theme-danger-contrast text-theme-danger-400" icon="StatusClock" />
-						</Avatar>
+						{signatures.map((signature: string) => (
+							<Avatar key={signature} address={signature} noShadow>
+								<Badge className="bg-theme-danger-contrast text-theme-danger-400" icon="StatusClock" />
+							</Avatar>
+						))}
 
-						<Avatar address="test" noShadow>
-							<Badge className="bg-theme-danger-contrast text-theme-danger-400" icon="StatusClock" />
-						</Avatar>
-
-						<Avatar address="test" noShadow>
+						{/* <Avatar address="test" noShadow>
 							<Badge className="bg-theme-success-200 text-theme-success-500" icon="Checkmark" />
-						</Avatar>
-
-						<Avatar address="test" noShadow>
-							<Badge className="bg-theme-danger-contrast text-theme-danger-400" icon="StatusClock" />
-						</Avatar>
+						</Avatar> */}
 					</div>
 				</div>
 			</div>
@@ -67,18 +73,22 @@ const Signatures = () => {
 	);
 };
 
-export const FirstStep = () => {
+export const FirstStep = ({ transaction, walletAlias, ticker }: FirstSetpProps) => {
 	const { t } = useTranslation();
 
 	return (
 		<section data-testid="MultiSignatureDetail__first-step">
-			<TransactionDetail label={t("TRANSACTION.SENDER")} extra={<Avatar address="test" />} border={false}>
-				<div className="mt-2 font-semibold">ADDRESS</div>
+			<TransactionDetail
+				label={t("TRANSACTION.SENDER")}
+				extra={<Avatar address={transaction.sender()} />}
+				border={false}
+			>
+				<div className="mt-2 font-semibold">{transaction.sender()}</div>
 			</TransactionDetail>
 
 			<TransactionDetail label={t("TRANSACTION.RECIPIENT")} extra={<Avatar address="test" />}>
-				Bank
-				<span className="ml-2 text-theme-neutral">ADDR...ESSS</span>
+				{walletAlias && walletAlias}
+				<span className="ml-2 text-theme-neutral">{transaction.recipient()}</span>
 			</TransactionDetail>
 
 			<TransactionDetail
@@ -89,28 +99,34 @@ export const FirstStep = () => {
 					</Circle>
 				}
 			>
-				<Label color="danger">2,088.84557 ARK</Label>
+				<Label color="danger">{transaction.amount().toHuman()}</Label>
 
 				<span className="ml-2 text-theme-neutral">23,000.00 USD</span>
 			</TransactionDetail>
 
-			<TransactionDetail label={t("TRANSACTION.TRANSACTION_FEE")}>0.09812015 ARK</TransactionDetail>
+			<TransactionDetail
+				label={t("TRANSACTION.TRANSACTION_FEE")}
+			>{`${transaction.fee().toHuman()} ${ticker?.toUpperCase()}`}</TransactionDetail>
 
-			<TransactionDetail label={t("TRANSACTION.SMARTBRIDGE")}>
-				<div className="flex justify-between">
-					Hello!
-					<Icon name="Smartbridge" width={20} height={20} />
-				</div>
+			{transaction.memo() && (
+				<TransactionDetail label={t("TRANSACTION.SMARTBRIDGE")}>
+					<div className="flex justify-between">
+						{transaction.memo()}
+						<Icon name="Smartbridge" width={20} height={20} />
+					</div>
+				</TransactionDetail>
+			)}
+
+			<TransactionDetail label={t("TRANSACTION.TIMESTAMP")}>
+				{transaction.timestamp()!.format("DD.MM.YYYY HH:mm:ss")}
 			</TransactionDetail>
-
-			<TransactionDetail label={t("TRANSACTION.TIMESTAMP")}>14.04.2020 21:42:40</TransactionDetail>
 
 			<TransactionDetail label={t("TRANSACTION.CONFIRMATIONS")} className="pb-0">
 				{t("TRANSACTION.MODAL_MULTISIGNATURE_DETAIL.WAITING_FOR_SIGNATURES")}
 			</TransactionDetail>
 
 			<div className="px-12 pt-8 mt-2 mt-8 -mx-12 text-black border-t border-gray-500">
-				<Signatures />
+				<Signatures signature={transaction.data.signature} signatures={transaction.data.signatures} />
 			</div>
 		</section>
 	);
@@ -131,9 +147,9 @@ export const SecondStep = () => {
 	);
 };
 
-export const ThirdStep = () => (
+export const ThirdStep = ({ transaction }: any) => (
 	<section data-testid="MultiSignatureDetail__third-step" className="my-4 text-black">
-		<Signatures />
+		<Signatures signature={transaction.data.signature} signatures={transaction.data.signatures} />
 	</section>
 );
 
@@ -164,19 +180,23 @@ export const MultiSignatureDetail = (props: MultiSignatureDetailProps) => {
 			<Form context={form} onSubmit={handleNext}>
 				<Tabs activeId={activeStep}>
 					<TabPanel tabId={1}>
-						<FirstStep />
+						<FirstStep
+							transaction={props.transaction}
+							walletAlias={props.walletAlias}
+							ticker={props.ticker}
+						/>
 					</TabPanel>
 					<TabPanel tabId={2}>
 						<SecondStep />
 					</TabPanel>
 					<TabPanel tabId={3}>
-						<ThirdStep />
+						<ThirdStep transaction={props.transaction} />
 					</TabPanel>
 
 					{activeStep < 3 && (
 						<div className="flex justify-end mt-6">
 							<div className="flex-1">
-								<Button variant="plain" onClick={props.onCancel} className="mr-2">
+								<Button variant="plain" onClick={props.onClose} className="mr-2">
 									{t("COMMON.CANCEL")}
 								</Button>
 							</div>

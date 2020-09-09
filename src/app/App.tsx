@@ -1,5 +1,6 @@
 // import { ADA } from "@arkecosystem/platform-sdk-ada";
 import { ARK } from "@arkecosystem/platform-sdk-ark";
+import { File as IpfsFile } from "@arkecosystem/platform-sdk-ipfs";
 // import { ATOM } from "@arkecosystem/platform-sdk-atom";
 // import { BTC } from "@arkecosystem/platform-sdk-btc";
 // import { EOS } from "@arkecosystem/platform-sdk-eos";
@@ -43,6 +44,11 @@ const Main = ({ syncInterval }: Props) => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pathname]);
+
+	useEffect(() => {
+		const ipfs = new IpfsFile(httpClient);
+		console.log("ipfs", ipfs);
+	}, []);
 
 	useLayoutEffect(() => {
 		const syncDelegates = async () => await env.delegates().syncAll();

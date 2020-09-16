@@ -476,7 +476,7 @@ exports[`Votes should navigate between delegate and vote table 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>
@@ -501,7 +501,7 @@ exports[`Votes should navigate between delegate and vote table 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>
@@ -1964,7 +1964,7 @@ exports[`Votes should render 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>
@@ -1989,7 +1989,7 @@ exports[`Votes should render 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>
@@ -3452,7 +3452,7 @@ exports[`Votes should select a delegate 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>
@@ -3477,7 +3477,7 @@ exports[`Votes should select a delegate 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>
@@ -5069,7 +5069,7 @@ exports[`Votes should select an address without vote 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>
@@ -5093,7 +5093,7 @@ exports[`Votes should select an address without vote 1`] = `
                         width="26"
                       >
                         <svg>
-                          ark.svg
+                          bind.svg
                         </svg>
                       </div>
                     </div>

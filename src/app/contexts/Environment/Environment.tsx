@@ -33,9 +33,15 @@ export const EnvironmentProvider = ({ children, env }: Props) => {
  */
 
 export const useEnvironmentContext = (): Context => {
+	const [, setState] = React.useState<any>(undefined);
+
 	const value = React.useContext(EnvironmentContext);
+
 	if (value === undefined) {
-		throw new Error("[useEnvironment] Component not wrapped within a Provider");
+		setState(() => {
+			throw new Error("[useEnvironment] Component not wrapped within a Provider");
+		});
 	}
+
 	return value;
 };

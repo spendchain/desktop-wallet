@@ -319,7 +319,7 @@ module.exports = {
 
   fonts: {
     'sans': [
-      'Proxima Nova',
+      'Poppins',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',

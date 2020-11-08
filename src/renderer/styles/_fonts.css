@@ -1,45 +1,101 @@
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('../assets/fonts/Proxima_Nova_Thin.otf');
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-ExtraLight.ttf');
   font-weight: 200;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('../assets/fonts/Proxima_Nova_Light.otf');
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Thin.ttf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Light.ttf');
   font-weight: 300;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('../assets/fonts/Proxima_Nova_Regular.otf');
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Regular.ttf');
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('../assets/fonts/Proxima_Nova_Semibold.otf');
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-SemiBold.ttf');
   font-weight: 600;
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('../assets/fonts/Proxima_Nova_Bold.otf');
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Bold.ttf');
   font-weight: 700;
 }
 
 @font-face {
-  font-family: 'Proxima Nova Condensed';
-  src: url('../assets/fonts/Proxima_Nova_Condensed_Regular.otf');
+  font-family: 'Poppins Condensed';
+  src: url('../assets/fonts/Poppins-Medium.ttf');
   font-weight: normal;
 }
 
 @font-face {
-  font-family: 'Proxima Nova Condensed';
-  src: url('../assets/fonts/Proxima_Nova_Condensed_Semibold.otf');
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-ExtraLightItalic.ttf');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-ThinItalic.ttf');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-LightItalic.ttf');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-Italic.ttf');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-SemiBoldItalic.ttf');
   font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins-BoldItalic.ttf');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Poppins Condensed';
+  src: url('../assets/fonts/Poppins-MediumItalic.ttf');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Poppins Condensed';
+  src: url('../assets/fonts/Poppins-ExtraBoldItalic.ttf');
+  font-weight: 600;
+  font-style: italic;
 }
 
 .font-condensed {
-  font-family: 'Proxima Nova Condensed', sans-serif;
+  font-family: 'Poppins Condensed', sans-serif;
 }

@@ -1,32 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 75">
-  <defs>
-    <style>
-      .cls-1 {
-        clip-path: url(#clip-Canvas);
-      }
-
-      .cls-2, .cls-3 {
-        fill: none;
-        stroke-linecap: round;
-        stroke-width: 2px;
-      }
-
-      .cls-2 {
-        stroke: #323a47;
-        opacity: 0.078;
-      }
-
-      .cls-3 {
-        stroke: #bccbd8;
-      }
-    </style>
-    <clipPath id="clip-Canvas">
-      <rect width="74" height="75"/>
-    </clipPath>
-  </defs>
-  <g class="cls-1">
-    <path class="cls-2" d="M70.843,2.25C58.206,3.482,19.363,29.276,9.79,71.01"/>
-    <path class="cls-3" d="M70.843,2.25C57.329-.341,14.193,15.03,9.79,71.01"/>
-    <path class="cls-3" d="M6.168,67.1S7.548,72.069,9.6,72.29s4.47-4.3,4.47-4.3"/>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 74 75" style="enable-background:new 0 0 74 75;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{opacity:7.800000e-02;fill:none;stroke:#323A47;stroke-width:2;stroke-linecap:round;enable-background:new    ;}
+	.st2{fill:none;stroke:#277EE6;stroke-width:2;stroke-linecap:round;}
+</style>
+<rect class="st0" width="74" height="75"/>
+<path class="st1" d="M70.8,2.2C58.2,3.5,19.4,29.3,9.8,71"/>
+<path class="st2" d="M70.8,2.2C57.3-0.3,14.2,15,9.8,71"/>
+<path class="st2" d="M6.2,67.1c0,0,1.4,5,3.4,5.2s4.5-4.3,4.5-4.3"/>
 </svg>

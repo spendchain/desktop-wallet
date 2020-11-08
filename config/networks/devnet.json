@@ -4,7 +4,7 @@
   "title": "SPEND Devnet",
   "server": "https://dexplorer.ark.io:8443",
   "description": "The SPND Devnet is only used for R&D by engineers.",
-  "imagePath": "networks/ark.devnet.svg",
+  "imagePath": "networks/spnd.devnet.svg",
   "apiVersion": 2,
   "slip44": "1",
   "market": {

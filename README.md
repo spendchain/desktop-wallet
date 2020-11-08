@@ -1,4 +1,4 @@
-# ARK Desktop Wallet
+# SPND Desktop Wallet
 
 ![Ark Desktop Wallet](./banner.png)
 

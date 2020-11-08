@@ -1,6 +1,6 @@
 # SPND Desktop Wallet
 
-![Ark Desktop Wallet](./banner.png)
+![SPND Desktop Wallet](./banner.png)
 
 [![Build Status](https://badgen.now.sh/github/status/ArkEcosystem/desktop-wallet)](https://github.com/ArkEcosystem/desktop-wallet/actions?query=branch%3Adevelop)
 [![Latest Version](https://badgen.now.sh/github/release/ArkEcosystem/desktop-wallet)](https://github.com/ArkEcosystem/desktop-wallet/releases)

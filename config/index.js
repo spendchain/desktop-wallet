@@ -150,11 +150,12 @@ exports.PLUGINS = {
   maxKeywords: 5,
   keywords: [
     '@arkecosystem',
+    '@spendchain',
     'desktop-wallet',
     'plugin'
   ],
-  officialScope: 'arkecosystem',
-  officialAuthor: 'ARK Ecosystem',
+  officialScope: 'spendchain',
+  officialAuthor: 'Spendchain',
   path: path.resolve(os.homedir(), '.ark-desktop/plugins'),
   reportUrl: 'https://www.spend.com/contact-us',
   sharePath: path.resolve(os.homedir(), '.ark-desktop/share'),

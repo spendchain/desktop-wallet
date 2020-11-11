@@ -1,24 +1,21 @@
 {
   "private": true,
-  "name": "ark-desktop-wallet",
-  "version": "2.9.4",
+  "name": "spnd-desktop-wallet",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArkEcosystem/desktop-wallet.git"
+    "url": "git+https://github.com/spendchain/desktop-wallet.git"
   },
-  "author": "ArkEcosystem <info@ark.io>",
+  "author": "Spendchain <info@spend.io>",
   "contributors": [
-    "Alex Barnsley <alex@ark.io>",
-    "ItsANameToo <itsanametoo@protonmail.com>",
-    "Juan A. Martín <juan@ark.io>",
-    "Lúcio Rubens <lucio@ark.io>"
+    "Spendchain Team <team@spend.io>"
   ],
-  "description": "Ark Ecosystem Desktop Wallet",
+  "description": "Spend Desktop Wallet",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ArkEcosystem/desktop-wallet/issues"
+    "url": "https://github.com/spendchain/desktop-wallet/issues"
   },
-  "homepage": "https://github.com/ArkEcosystem/desktop-wallet#readme",
+  "homepage": "https://github.com/spendchain/desktop-wallet#readme",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder --publish never",
@@ -201,7 +198,7 @@
   },
   "build": {
     "productName": "SPND Desktop Wallet",
-    "appId": "io.ark.desktop-wallet",
+    "appId": "io.spnd.desktop-wallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
     "afterSign": "scripts/notarize.js",
     "npmRebuild": false,
@@ -213,9 +210,9 @@
       "app-update.yml"
     ],
     "protocols": {
-      "name": "Ark URI scheme",
+      "name": "Spnd URI scheme",
       "schemes": [
-        "ark"
+        "spnd"
       ],
       "role": "Viewer"
     },
@@ -250,7 +247,7 @@
         "snap"
       ],
       "desktop": {
-        "MimeType": "x-scheme-handler/ark;"
+        "MimeType": "x-scheme-handler/spnd;"
       }
     },
     "deb": {

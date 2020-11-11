@@ -4,6 +4,7 @@ import path from 'path'
 
 const allowedProtocols = [
   'ark:',
+  'spnd:',
   'http:',
   'https:'
 ]

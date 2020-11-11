@@ -3,7 +3,7 @@ const os = require('os')
 const path = require('path')
 
 exports.APP = {
-  website: 'https://ark.io',
+  website: 'https://www.spend.com/',
   transactionExpiryMinutes: 45
 }
 
@@ -18,7 +18,7 @@ exports.PEERS = {
 }
 
 exports.ANNOUNCEMENTS = {
-  rssUrl: 'https://blog.ark.io/feed'
+  rssUrl: 'https://medium.com/spend'
 }
 
 exports.VENDOR_FIELD = {
@@ -156,7 +156,7 @@ exports.PLUGINS = {
   officialScope: 'arkecosystem',
   officialAuthor: 'ARK Ecosystem',
   path: path.resolve(os.homedir(), '.ark-desktop/plugins'),
-  reportUrl: 'https://ark.io/contact',
+  reportUrl: 'https://www.spend.com/contact-us',
   sharePath: path.resolve(os.homedir(), '.ark-desktop/share'),
   updateInterval: {
     value: 1,

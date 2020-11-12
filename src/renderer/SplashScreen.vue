@@ -3,7 +3,7 @@
     <div class="flex flex-1 justify-center">
       <div class="flex rounded-lg mb-3 p-5 bg-red m-auto">
         <img
-          src="@/assets/images/spnd-logo.png"
+          src="@/assets/images/spnd-logo.svg"
           class="h-12"
         >
       </div>
@@ -73,7 +73,7 @@ export default {
 
   computed: {
     version () {
-      return packageJson.version
+      return packageJson['fork-version']
     },
     loadingMessage () {
       if (window.navigator.onLine) {

@@ -14,7 +14,7 @@ exports.NETWORKS = [
 
 exports.PEERS = {
   'ark.mainnet': require('./peers/mainnet.json'),
-  'spnd.devnet': require('./peers/devnet.json')
+  'ark.devnet': require('./peers/devnet.json')
 }
 
 exports.ANNOUNCEMENTS = {

@@ -1,16 +1,17 @@
 {
   "private": true,
   "name": "spnd-desktop-wallet",
-  "version": "1.0.0",
+  "version": "2.9.4",
+  "fork-version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/spendchain/desktop-wallet.git"
   },
-  "author": "Spendchain <info@spend.io>",
+  "author": "Spendchain <info@spend.com>",
   "contributors": [
-    "Spendchain Team <team@spend.io>"
+    "Spendchain Team <team@spend.com>"
   ],
-  "description": "Spend Desktop Wallet",
+  "description": "Spendchain Desktop Wallet",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/spendchain/desktop-wallet/issues"
@@ -197,7 +198,7 @@
     "webpack-hot-middleware": "^2.25.0"
   },
   "build": {
-    "productName": "SPND Desktop Wallet",
+    "productName": "Spend Desktop Wallet",
     "appId": "io.spnd.desktop-wallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
     "afterSign": "scripts/notarize.js",
@@ -210,7 +211,7 @@
       "app-update.yml"
     ],
     "protocols": {
-      "name": "Spnd URI scheme",
+      "name": "Spend URI scheme",
       "schemes": [
         "spnd"
       ],

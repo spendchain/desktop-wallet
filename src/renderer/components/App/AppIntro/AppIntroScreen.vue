@@ -6,7 +6,7 @@
         class="AppIntroScreen__container__left__logo"
       >
         <img
-          :src="assets_loadImage('spnd-logo.png')"
+          :src="assets_loadImage('spnd-logo.svg')"
           class="h-full"
         >
       </div>

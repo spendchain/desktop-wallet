@@ -323,7 +323,7 @@ export default {
 
       const networkLookup = {
         'ark.mainnet': 'mainnet',
-        'spnd.devnet': 'devnet'
+        'ark.devnet': 'devnet'
       }
 
       if (networkLookup[network.id]) {
@@ -364,7 +364,7 @@ export default {
 
         const networkLookup = {
           'ark.mainnet': 'mainnet',
-          'spnd.devnet': 'devnet'
+          'ark.devnet': 'devnet'
         }
 
         if (network && networkLookup[network.id]) {

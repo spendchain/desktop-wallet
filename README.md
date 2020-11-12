@@ -1,6 +1,6 @@
-# SPND Desktop Wallet
+# Spend Desktop Wallet
 
-![SPND Desktop Wallet](./banner.png)
+![Spend Desktop Wallet](./banner.png)
 
 [![Build Status](https://badgen.now.sh/github/status/spendchain/desktop-wallet)](https://github.com/spendchain/desktop-wallet/actions?query=branch%3Adevelop)
 [![Latest Version](https://badgen.now.sh/github/release/spendchain/desktop-wallet)](https://github.com/spendchain/desktop-wallet/releases)
@@ -120,7 +120,7 @@ yarn test:e2e:full
 
 ## Security
 
-If you discover a security vulnerability within this package, please send an e-mail to security@spend.io. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this package, please send an e-mail to security@spend.com. All security vulnerabilities will be promptly addressed.
 
 ## Credits
 

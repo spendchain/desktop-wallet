@@ -18,7 +18,7 @@ class NpmAdapter {
     let totalCount = 0
     const size = 250
 
-    while (!totalCount || plugins.length < totalCount) {
+    while (false || !totalCount || plugins.length < totalCount) {
       const pluginResponse = await this.fetchPlugins({
         from,
         size

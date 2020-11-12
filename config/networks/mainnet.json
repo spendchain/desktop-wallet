@@ -1,9 +1,9 @@
 {
   "id": "ark.mainnet",
-  "name": "SPND Mainnet",
-  "title": "SPND Mainnet",
+  "name": "Spend Mainnet",
+  "title": "Spend Mainnet",
   "server": "https://explorer.ark.io:8443",
-  "description": "The SPND Mainnet should be chosen in most cases.",
+  "description": "The Spend Mainnet should be chosen in most cases.",
   "imagePath": "networks/spnd.png",
   "apiVersion": 2,
   "slip44": "111",

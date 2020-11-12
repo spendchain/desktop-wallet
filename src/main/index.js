@@ -180,7 +180,7 @@ if (!gotTheLock) {
     // Someone tried to run a second instance, we should focus our window.
     // argv: An array of the second instance’s (command line / deep linked) arguments
     for (const arg of argv) {
-      if (arg.startsWith('spnd:')) {
+      if (arg.startsWith('ark:')) {
         deeplinkingUrl = arg
         broadcastURL(deeplinkingUrl)
         break
@@ -196,7 +196,7 @@ if (!gotTheLock) {
   })
 
   for (const arg of process.argv) {
-    if (arg.startsWith('spnd:')) {
+    if (arg.startsWith('ark:')) {
       deeplinkingUrl = arg
       broadcastURL(deeplinkingUrl)
       break
@@ -231,4 +231,4 @@ app.on('open-url', (event, url) => {
   broadcastURL(deeplinkingUrl)
 })
 
-app.setAsDefaultProtocolClient('spnd', process.execPath, ['--'])
+app.setAsDefaultProtocolClient('ark', process.execPath, ['--'])

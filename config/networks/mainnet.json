@@ -4,7 +4,7 @@
   "title": "SPND Mainnet",
   "server": "https://explorer.ark.io:8443",
   "description": "The SPND Mainnet should be chosen in most cases.",
-  "imagePath": "networks/ark.png",
+  "imagePath": "networks/spnd.png",
   "apiVersion": 2,
   "slip44": "111",
   "market": {

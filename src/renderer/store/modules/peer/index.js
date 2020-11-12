@@ -323,7 +323,7 @@ export default {
 
       const networkLookup = {
         'ark.mainnet': 'mainnet',
-        'ark.devnet': 'devnet'
+        'spnd.devnet': 'devnet'
       }
 
       if (networkLookup[network.id]) {
@@ -364,7 +364,7 @@ export default {
 
         const networkLookup = {
           'ark.mainnet': 'mainnet',
-          'ark.devnet': 'devnet'
+          'spnd.devnet': 'devnet'
         }
 
         if (network && networkLookup[network.id]) {
@@ -376,7 +376,8 @@ export default {
             try {
               const seeds = fallbackSeeds[network.id]
               const seed = seeds[Math.floor(Math.random() * seeds.length)]
-              const peerDiscovery = await PeerDiscovery.new({ networkOrHost: `http://${seed.ip}:4003/api/peers` })
+              const port = network.id.includes('spnd') ? 4103 : 4003
+              const peerDiscovery = await PeerDiscovery.new({ networkOrHost: `http://${seed.ip}:${port}/api/peers` })
 
               peers = await discoverPeers(peerDiscovery)
 

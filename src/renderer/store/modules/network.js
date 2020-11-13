@@ -107,6 +107,8 @@ export default new BaseModule(NetworkModel, {
           } catch (error) {
             this._vm.$logger.error('Could not retrieve known wallets: ', error)
           }
+        } else {
+          network.knownWallets = {}
         }
 
         commit('UPDATE', {

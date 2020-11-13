@@ -6,6 +6,7 @@ button:disabled {
   cursor: default;
   color: #838a9b;
   pointer-events: none;
+  opacity: .6;
 }
 
 .hover-button-blue-shadow-definition {

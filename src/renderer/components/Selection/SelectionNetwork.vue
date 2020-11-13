@@ -8,6 +8,7 @@
       :show-title="true"
       :class="[selected.id === network.id && !isOtherSelected ? 'SelectionNetworkButton--selected' : null]"
       class="SelectionNetworkButton"
+      :disabled="network.id.includes('mainnet')"
       @click="select(network)"
     />
 

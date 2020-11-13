@@ -13,8 +13,8 @@ exports.NETWORKS = [
 ]
 
 exports.PEERS = {
-  'ark.mainnet': require('./peers/mainnet.json'),
-  'ark.devnet': require('./peers/devnet.json')
+  'spnd.devnet': require('./peers/devnet.json'),
+  'ark.mainnet': require('./peers/mainnet.json')
 }
 
 exports.ANNOUNCEMENTS = {
@@ -150,11 +150,10 @@ exports.PLUGINS = {
   maxKeywords: 5,
   keywords: [
     '@arkecosystem',
-    '@spendchain',
     'desktop-wallet',
     'plugin'
   ],
-  officialScope: 'spendchain',
+  officialScope: 'arkecosystem',
   officialAuthor: 'Spendchain',
   path: path.resolve(os.homedir(), '.ark-desktop/plugins'),
   reportUrl: 'https://www.spend.com/contact-us',

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "spnd-desktop-wallet",
-  "version": "2.9.4",
+  "version": "1.0.0",
   "fork-version": "1.0.0",
   "repository": {
     "type": "git",

@@ -323,12 +323,13 @@ export default {
       }
 
       const networkLookup = {
-        'spnd.devnet': 'devnet',
+        // 'spnd.devnet': 'devnet',
         'ark.mainnet': 'mainnet'
       }
 
+      const isDevNet = network.id.includes('devnet')
+
       if (networkLookup[network.id]) {
-        const isDevNet = network.id.includes('devnet')
         return PeerDiscovery.new({
           networkOrHost: networkLookup[network.id],
           defaultPort: isDevNet ? 4103 : 4003
@@ -337,12 +338,14 @@ export default {
         const peerUrl = getBaseUrl(getters.current())
 
         return PeerDiscovery.new({
-          networkOrHost: `${peerUrl}/api/peers`
+          networkOrHost: `${peerUrl}/api/peers`,
+          defaultPort: isDevNet ? 4103 : 4003
         })
       }
 
       return PeerDiscovery.new({
-        networkOrHost: `${network.server}/api/peers`
+        networkOrHost: `${network.server}/api/peers`,
+        defaultPort: isDevNet ? 4103 : 4003
       })
     },
 

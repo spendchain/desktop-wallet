@@ -73,6 +73,7 @@
     "dayjs": "^1.8.11",
     "decompress": "^4.2.0",
     "deepmerge": "^4.1.1",
+    "dotenv": "^8.2.0",
     "du": "^1.0.0",
     "electron-dl": "^3.0.0",
     "electron-log": "^4.0.0",

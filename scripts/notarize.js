@@ -1,3 +1,4 @@
+require('dotenv').config()
 /* eslint-disable no-return-await */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { notarize } = require('electron-notarize')

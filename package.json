@@ -200,7 +200,7 @@
   },
   "build": {
     "productName": "Spend Desktop Wallet",
-    "appId": "io.spnd.desktop-wallet",
+    "appId": "com.spendchain.wallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
     "afterSign": "scripts/notarize.js",
     "npmRebuild": false,

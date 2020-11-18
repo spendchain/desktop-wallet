@@ -404,10 +404,10 @@ export default {
       }
 
       if (!peers.length) {
-        this._vm.$error(i18n.t('PEER.FAILED_REFRESH'))
+        // this._vm.$error(i18n.t('PEER.FAILED_REFRESH'))
+      } else {
+        dispatch('set', peers)
       }
-
-      dispatch('set', peers)
     },
 
     /**

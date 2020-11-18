@@ -264,7 +264,8 @@
       ]
     },
     "dmg": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "sign": false
     },
     "nsis": {
       "perMachine": true,

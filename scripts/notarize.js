@@ -29,7 +29,9 @@ exports.default = async function notarizing (context) {
   return await notarize({
     appBundleId: 'com.spendchain.wallet',
     appPath: `${appOutDir}/${appName}.app`,
-    appleApiKey: process.env.APPLE_API_KEY_ID,
-    appleApiIssuer: process.env.APPLE_API_KEY_ISSUER_ID
+    // appleApiKey: process.env.APPLE_API_KEY_ID,
+    // appleApiIssuer: process.env.APPLE_API_KEY_ISSUER_ID
+    appleId: process.env.APPLE_ID,
+    appleIdPassword: process.env.APPLE_ID_PASSWORD
   })
 }

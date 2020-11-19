@@ -54,6 +54,7 @@
           v-for="network in networks"
           :key="network.id"
           class="NetworkOverview__network flex items-center w-full"
+          :disabled="network.id.includes('mainnet')"
           @click="openNetwork(network.id)"
         >
           <SelectionNetworkButton
@@ -72,7 +73,10 @@
               {{ network.description }}
             </span>
           </div>
-          <span class="p-2 hidden md:inline-block">
+          <span
+            v-if="!network.id.includes('mainnet')"
+            class="p-2 hidden md:inline-block"
+          >
             <SvgIcon
               name="settings-filled"
               view-box="0 0 23 23"
@@ -121,7 +125,7 @@ export default {
 
   methods: {
     getNetworks () {
-      const defaultNetworkIds = ['ark.mainnet', 'ark.devnet']
+      const defaultNetworkIds = ['ark.mainnet', 'spnd.devnet']
 
       this.networks = Object.values(this.$store.getters['network/all']).map(network => {
         return {
@@ -131,6 +135,7 @@ export default {
       })
     },
     openNetwork (network) {
+      if (network.includes('mainnet')) return
       this.selected = network
     },
     openAddNetwork () {

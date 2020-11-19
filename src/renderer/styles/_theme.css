@@ -23,7 +23,7 @@
 
   --theme-table-row-hover: #f8f9fd;
   --theme-transaction-sent: #fef4f5;
-  --theme-transaction-sent-arrow: #e51317;
+  --theme-transaction-sent-arrow: #3575ED; /* color-blue */
   --theme-transaction-received: #e3fcec;
   --theme-transaction-received-arrow: #2db761;
   --theme-send-circle-second-signature: #6c5494;
@@ -43,13 +43,13 @@
 
   --theme-feature: white;
   --theme-feature-item-text: #c0cddf;
-  --theme-feature-item-hover: #fef4f5;
+  --theme-feature-item-hover: #cbdff8;
   --theme-feature-item-alternative: #f0f2f9;
   --theme-feature-item-alternative-text: #8b9bab;
-  --theme-feature-item-hover-text: #e6b1b5;
-  --theme-feature-item-selected: #fef4f5;
-  --theme-feature-item-selected-text: #ce6970;
-  --theme-feature-item-indicator: #f03643;
+  --theme-feature-item-hover-text: #82b6f7;
+  --theme-feature-item-selected: #cbdff8;
+  --theme-feature-item-selected-text: #65a4f1;
+  --theme-feature-item-indicator: #277de6;
 
   --theme-secondary-feature: #f7f9fb;
 
@@ -163,14 +163,14 @@
   --theme-wallet-sign-verify-message-text: #585c6f;
   --theme-wallet-grid-shadow: 0 5px 30px rgba(0,0,0, 0.15);
 
-  --theme-feature: #2d2f38;
-  --theme-feature-item-text: #5a5e7a;
-  --theme-feature-item-hover: #403645;
-  --theme-feature-item-alternative: #363844;
-  --theme-feature-item-alternative-text: #5d6483;
-  --theme-feature-item-selected: #403645; /* TODO: same as hover */
-  --theme-feature-item-selected-text: #c6799a;
-  --theme-feature-item-indicator: #f03643;
+  --theme-feature: #277de6;
+  --theme-feature-item-text: #c0cddf;
+  --theme-feature-item-hover: #cbdff8;
+  --theme-feature-item-alternative: #f0f2f9;
+  --theme-feature-item-alternative-text: #8b9bab;
+  --theme-feature-item-selected: #cbdff8;
+  --theme-feature-item-selected-text: #65a4f1;
+  --theme-feature-item-indicator: #277de6;
 
   --theme-secondary-feature: #2e313a;
 

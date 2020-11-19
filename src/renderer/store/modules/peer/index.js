@@ -124,6 +124,7 @@ export default {
      * @return {Object[]} containing peer objects
      */
     randomSeedPeers: (_, __, ___, rootGetters) => (amount = 5, networkId = null) => {
+      console.log(networkId, config)
       if (!networkId) {
         const profile = rootGetters['session/profile']
         if (!profile || !profile.networkId) {
@@ -322,24 +323,29 @@ export default {
       }
 
       const networkLookup = {
-        'ark.mainnet': 'mainnet',
-        'ark.devnet': 'devnet'
+        // 'spnd.devnet': 'devnet',
+        'ark.mainnet': 'mainnet'
       }
+
+      const isDevNet = network.id.includes('devnet')
 
       if (networkLookup[network.id]) {
         return PeerDiscovery.new({
-          networkOrHost: networkLookup[network.id]
+          networkOrHost: networkLookup[network.id],
+          defaultPort: isDevNet ? 4103 : 4003
         })
       } else if (getters.current()) {
         const peerUrl = getBaseUrl(getters.current())
 
         return PeerDiscovery.new({
-          networkOrHost: `${peerUrl}/api/peers`
+          networkOrHost: `${peerUrl}/api/peers`,
+          defaultPort: isDevNet ? 4103 : 4003
         })
       }
 
       return PeerDiscovery.new({
-        networkOrHost: `${network.server}/api/peers`
+        networkOrHost: `${network.server}/api/peers`,
+        defaultPort: isDevNet ? 4103 : 4003
       })
     },
 
@@ -363,8 +369,8 @@ export default {
         }
 
         const networkLookup = {
-          'ark.mainnet': 'mainnet',
-          'ark.devnet': 'devnet'
+          'spnd.devnet': 'devnet',
+          'ark.mainnet': 'mainnet'
         }
 
         if (network && networkLookup[network.id]) {
@@ -376,7 +382,12 @@ export default {
             try {
               const seeds = fallbackSeeds[network.id]
               const seed = seeds[Math.floor(Math.random() * seeds.length)]
-              const peerDiscovery = await PeerDiscovery.new({ networkOrHost: `http://${seed.ip}:4003/api/peers` })
+
+              const isDevNet = network.id.includes('devnet')
+              const peerDiscovery = await PeerDiscovery.new({
+                networkOrHost: `http://${seed.ip}:${isDevNet ? 4103 : 4003}/api/peers`,
+                defaultPort: isDevNet ? 4103 : 4003
+              })
 
               peers = await discoverPeers(peerDiscovery)
 
@@ -393,10 +404,10 @@ export default {
       }
 
       if (!peers.length) {
-        this._vm.$error(i18n.t('PEER.FAILED_REFRESH'))
+        // this._vm.$error(i18n.t('PEER.FAILED_REFRESH'))
+      } else {
+        dispatch('set', peers)
       }
-
-      dispatch('set', peers)
     },
 
     /**

@@ -3,7 +3,7 @@ const os = require('os')
 const path = require('path')
 
 exports.APP = {
-  website: 'https://ark.io',
+  website: 'https://www.spend.com/',
   transactionExpiryMinutes: 45
 }
 
@@ -13,12 +13,12 @@ exports.NETWORKS = [
 ]
 
 exports.PEERS = {
-  'ark.mainnet': require('./peers/mainnet.json'),
-  'ark.devnet': require('./peers/devnet.json')
+  'spnd.devnet': require('./peers/devnet.json'),
+  'ark.mainnet': require('./peers/mainnet.json')
 }
 
 exports.ANNOUNCEMENTS = {
-  rssUrl: 'https://blog.ark.io/feed'
+  rssUrl: 'https://medium.com/spend'
 }
 
 exports.VENDOR_FIELD = {
@@ -154,9 +154,9 @@ exports.PLUGINS = {
     'plugin'
   ],
   officialScope: 'arkecosystem',
-  officialAuthor: 'ARK Ecosystem',
+  officialAuthor: 'Spendchain',
   path: path.resolve(os.homedir(), '.ark-desktop/plugins'),
-  reportUrl: 'https://ark.io/contact',
+  reportUrl: 'https://www.spend.com/contact-us',
   sharePath: path.resolve(os.homedir(), '.ark-desktop/share'),
   updateInterval: {
     value: 1,

@@ -1,26 +1,50 @@
-[{
-  "ip": "167.114.29.51",
-  "port": 4003,
-  "isHttps": false,
-  "version": "2"
-}, {
-  "ip": "167.114.29.52",
-  "port": 4003,
-  "isHttps": false,
-  "version": "2"
-}, {
-  "ip": "167.114.29.53",
-  "port": 4003,
-  "isHttps": false,
-  "version": "2"
-}, {
-  "ip": "167.114.29.54",
-  "port": 4003,
-  "isHttps": false,
-  "version": "2"
-}, {
-  "ip": "167.114.29.55",
-  "port": 4003,
-  "isHttps": false,
-  "version": "2"
-}]
+[
+  {
+    "ip": "44.233.83.94",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  },
+  {
+    "ip": "44.238.55.18",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  },
+  {
+    "ip": "54.200.91.152",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  },
+  {
+    "ip": "44.241.115.39",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  },
+  {
+    "ip": "54.244.185.57",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  },
+  {
+    "ip": "44.231.242.50",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  },
+  {
+    "ip": "44.233.63.4",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  },
+  {
+    "ip": "52.27.100.120",
+    "port": 4103,
+    "isHttps": false,
+    "version": "2"
+  }
+]

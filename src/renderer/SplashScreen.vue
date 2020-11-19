@@ -3,7 +3,7 @@
     <div class="flex flex-1 justify-center">
       <div class="flex rounded-lg mb-3 p-5 bg-red m-auto">
         <img
-          src="@/assets/images/ark-logo.png"
+          src="@/assets/images/spnd-logo.svg"
           class="h-12"
         >
       </div>
@@ -11,7 +11,7 @@
 
     <div class="flex-inline">
       <div class="text-4xl mb-4">
-        <span class="font-semibold">{{ $t('COMMON.ARK') }}</span>
+        <span class="font-semibold">{{ $t('COMMON.SPND') }}</span>
         {{ $t('COMMON.DESKTOP_WALLET') }}
       </div>
 
@@ -59,7 +59,7 @@
     </div>
 
     <div class="flex-inline text-sm pb-4">
-      {{ `${$t('COMMON.VERSION')} ${version}` }}
+      {{ `${$t('COMMON.VERSION')} ${forkVersion}` }}
     </div>
   </div>
 </template>
@@ -74,6 +74,9 @@ export default {
   computed: {
     version () {
       return packageJson.version
+    },
+    forkVersion () {
+      return packageJson['fork-version']
     },
     loadingMessage () {
       if (window.navigator.onLine) {

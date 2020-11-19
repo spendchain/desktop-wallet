@@ -1,15 +1,15 @@
 {
   "id": "ark.mainnet",
-  "name": "ARK Mainnet",
-  "title": "ARK Mainnet",
+  "name": "Spend Mainnet",
+  "title": "Spend Mainnet",
   "server": "https://explorer.ark.io:8443",
-  "description": "The ARK Mainnet should be chosen in most cases.",
-  "imagePath": "networks/ark.png",
+  "description": "The Spend Mainnet should be chosen in most cases.",
+  "imagePath": "networks/spnd.png",
   "apiVersion": 2,
   "slip44": "111",
   "market": {
     "enabled": true,
-    "ticker": "ARK"
+    "ticker": "SPND"
   },
   "feeStatistics": [
     {
@@ -55,9 +55,9 @@
   "nethash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
   "explorer": "https://explorer.ark.io",
   "knownWalletsUrl": "https://raw.githubusercontent.com/ArkEcosystem/common/master/mainnet/known-wallets.json",
-  "token": "ARK",
-  "subunit": "arktoshi",
-  "symbol": "Ѧ",
+  "token": "SPND",
+  "subunit": "spndtoshi",
+  "symbol": "S",
   "fractionDigits": 8,
   "version": 23,
   "wif": 170

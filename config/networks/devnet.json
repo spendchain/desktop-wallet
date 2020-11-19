@@ -1,15 +1,15 @@
 {
-  "id": "ark.devnet",
-  "name": "ARK Devnet",
-  "title": "ARK Devnet",
-  "server": "https://dexplorer.ark.io:8443",
-  "description": "The ARK Devnet is only used for R&D by engineers.",
-  "imagePath": "networks/ark.devnet.svg",
+  "id": "spnd.devnet",
+  "name": "Spend Devnet",
+  "title": "Spend Devnet",
+  "server": "http://44.238.55.18:4103",
+  "description": "The Spend Devnet is only used for R&D by engineers.",
+  "imagePath": "networks/spnd.devnet.svg",
   "apiVersion": 2,
   "slip44": "1",
   "market": {
     "enabled": false,
-    "ticker": null
+    "ticker": "SPND"
   },
   "feeStatistics": [
     {
@@ -52,13 +52,13 @@
   "vendorField": {
     "maxLength": 255
   },
-  "nethash": "2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867",
-  "explorer": "https://dexplorer.ark.io",
-  "knownWalletsUrl": "https://raw.githubusercontent.com/ArkEcosystem/common/master/devnet/known-wallets.json",
-  "token": "DARK",
-  "subunit": "darktoshi",
-  "symbol": "DѦ",
+  "nethash": "321e91110d3b1a6845f25359df13a919492f316a21272ed257ccd088936c3aa0",
+  "explorer": "https://dexplorer.spendchain.net",
+  "knownWalletsUrl": "",
+  "token": "SPND",
+  "subunit": "spndtoshi",
+  "symbol": "SPND",
   "fractionDigits": 8,
   "version": 30,
-  "wif": 170
+  "wif": 30
 }

@@ -1,27 +1,27 @@
-# ARK Desktop Wallet
+# Spend Desktop Wallet
 
-![Ark Desktop Wallet](./banner.png)
+![Spend Desktop Wallet](./banner.png)
 
-[![Build Status](https://badgen.now.sh/github/status/ArkEcosystem/desktop-wallet)](https://github.com/ArkEcosystem/desktop-wallet/actions?query=branch%3Adevelop)
-[![Latest Version](https://badgen.now.sh/github/release/ArkEcosystem/desktop-wallet)](https://github.com/ArkEcosystem/desktop-wallet/releases)
+[![Build Status](https://badgen.now.sh/github/status/spendchain/desktop-wallet)](https://github.com/spendchain/desktop-wallet/actions?query=branch%3Adevelop)
+[![Latest Version](https://badgen.now.sh/github/release/spendchain/desktop-wallet)](https://github.com/spendchain/desktop-wallet/releases)
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
 > Lead Maintainer: [Alex Barnsley](https://github.com/alexbarnsley)
 
 ## Download
 
-[Latest Release](https://github.com/ArkEcosystem/ark-desktop/releases/latest)
+[Latest Release](https://github.com/spendchain/spnd-desktop/releases/latest)
 
 ## Installing via Package Managers
 
 ### Arch Linux
 
-Install via [AUR](https://aur.archlinux.org/packages/ark-desktop):
+Install via [AUR](https://aur.archlinux.org/packages/spnd-desktop):
 
 > Manjaro
 
 ```shell
-pamac build ark-desktop
+pamac build spnd-desktop
 ```
 
 ### Mac OS X
@@ -29,7 +29,7 @@ pamac build ark-desktop
 Install via [Homebrew](https://brew.sh/):
 
 ```shell
-brew cask install ark-desktop-wallet
+brew cask install spnd-desktop-wallet
 ```
 
 ## Translations
@@ -120,7 +120,7 @@ yarn test:e2e:full
 
 ## Security
 
-If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within this package, please send an e-mail to security@spend.com. All security vulnerabilities will be promptly addressed.
 
 ## Credits
 
@@ -128,4 +128,4 @@ This project exists thanks to all the people who [contribute](../../contributors
 
 ## License
 
-[MIT](LICENSE) © [ARK Ecosystem](https://ark.io)
+[MIT](LICENSE) © [Spendchain](https://www.spend.com/)

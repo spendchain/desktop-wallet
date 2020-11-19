@@ -6,7 +6,7 @@
         class="AppIntroScreen__container__left__logo"
       >
         <img
-          :src="assets_loadImage('ark-logo.png')"
+          :src="assets_loadImage('spnd-logo.svg')"
           class="h-full"
         >
       </div>
@@ -153,11 +153,11 @@ export default {
 }
 
 .AppIntroScreen__container__left {
-  background-color: #2d2f38;
+  background-color: #2e2f37;
 }
 
 .AppIntroScreen__container__left__logo {
-  background-color: #c9292c;
+  background-color: #277de6;
   @apply .absolute .flex .justify-center .h-18 .w-18 .px-3 .py-4 .rounded-tl-lg .rounded-br-lg
 }
 

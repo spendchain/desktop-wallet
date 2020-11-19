@@ -1,3 +1,4 @@
+require('dotenv').config()
 /* eslint-disable no-return-await */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { notarize } = require('electron-notarize')
@@ -26,9 +27,11 @@ exports.default = async function notarizing (context) {
   const appName = context.packager.appInfo.productFilename
 
   return await notarize({
-    appBundleId: 'io.ark.desktop-wallet',
+    appBundleId: 'com.spendchain.wallet',
     appPath: `${appOutDir}/${appName}.app`,
-    appleApiKey: process.env.APPLE_API_KEY_ID,
-    appleApiIssuer: process.env.APPLE_API_KEY_ISSUER_ID
+    // appleApiKey: process.env.APPLE_API_KEY_ID,
+    // appleApiIssuer: process.env.APPLE_API_KEY_ISSUER_ID
+    appleId: process.env.APPLE_ID,
+    appleIdPassword: process.env.APPLE_ID_PASSWORD
   })
 }

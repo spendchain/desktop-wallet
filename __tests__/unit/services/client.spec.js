@@ -30,7 +30,7 @@ jest.mock('@/store', () => ({
     'session/network': {},
     'network/byId': (id) => {
       let version = 23
-      if (id === 'ark.devnet') {
+      if (id === 'spnd.devnet') {
         version = 30
       }
 
@@ -555,7 +555,7 @@ describe('Services > Client', () => {
             address: 'address-1',
             publicKey: 'publicKey-1',
             name: 'Business Name',
-            website: 'http://t-explorer.ark.io',
+            website: 'https://dexplorer.spendchain.net',
             isResigned: false
           }
         ]
@@ -1119,7 +1119,7 @@ describe('Services > Client', () => {
     describe('when a custom network is specified', () => {
       it('should have the correct version', async () => {
         setAip11AndSpy(false, false)
-        const networkId = 'ark.devnet'
+        const networkId = 'spnd.devnet'
         const transaction = await client.buildTransfer({ fee: new BigNumber(fees[1][0]), networkId, passphrase: 'test' }, false, true)
         expect(transaction.data.network).toBe(30)
       })
@@ -1575,7 +1575,7 @@ describe('Services > Client', () => {
         name: 'google',
         website: 'https://www.google.com',
         vat: 'GB123456',
-        repository: 'https://github.com/arkecosystem/desktop-wallet.git'
+        repository: 'https://github.com/spendchain/desktop-wallet.git'
       },
       passphrase: 'passphrase',
       secondPassphrase: 'second passphrase',
@@ -1669,7 +1669,7 @@ describe('Services > Client', () => {
         name: 'google',
         website: 'https://www.google.com',
         vat: 'GB123456',
-        repository: 'https://github.com/arkecosystem/desktop-wallet.git'
+        repository: 'https://github.com/spendchain/desktop-wallet.git'
       },
       passphrase: 'passphrase',
       secondPassphrase: 'second passphrase',
@@ -1836,7 +1836,7 @@ describe('Services > Client', () => {
           '@arkecosystem/core-api': 4003
         },
         genesisHash: '2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867',
-        bridgechainRepository: 'https://github.com/arkecosystem/core.git'
+        bridgechainRepository: 'https://github.com/spendchain/core.git'
       },
       passphrase: 'passphrase',
       secondPassphrase: 'second passphrase',

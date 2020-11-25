@@ -24,7 +24,7 @@ describe('WebFrame', () => {
     expect(webview.attributes('preload')).toBeTruthy()
   })
 
-  it('should accept ark uri', () => {
+  it('should accept spnd uri', () => {
     const wrapper = mount(WebFrame, {
       propsData: {
         src: 'ark:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'

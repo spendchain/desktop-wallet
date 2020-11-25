@@ -24,12 +24,12 @@ export default new BaseModel({
     sender: {
       type: 'string'
     },
-    // As arktoshi
+    // As spndtoshi
     amount: {
       type: 'string',
       format: (data) => toString(data.amount || 0)
     },
-    // As arktoshi
+    // As spndtoshi
     fee: {
       type: 'string',
       format: (data) => toString(data.fee || 0)

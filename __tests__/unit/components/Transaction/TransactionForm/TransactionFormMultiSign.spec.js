@@ -10,7 +10,7 @@ localVue.use(Vuelidate)
 const i18n = installI18n(localVue)
 
 const network = {
-  token: 'ARK',
+  token: 'SPND',
   version: 23,
   wif: 170,
   market: {

@@ -61,7 +61,7 @@ const transactions = {
     asset: {
       businessRegistration: {
         name: 'test business',
-        website: 'https://ark.io',
+        website: 'https://www.spend.com',
         vat: 'GB12345678',
         repository: 'https://github.com/arkecosystem/desktop-wallet.git'
       }
@@ -79,9 +79,9 @@ const transactions = {
     asset: {
       businessUpdate: {
         name: 'test business',
-        website: 'https://ark.io',
+        website: 'https://www.spend.com',
         vat: 'GB12345678',
-        repository: 'https://github.com/arkecosystem/desktop-wallet.git'
+        repository: 'https://github.com/spendchain/desktop-wallet.git'
       }
     }
   },
@@ -100,7 +100,7 @@ const transactions = {
         ports: {
           '@arkecosystem/core-api': 4003
         },
-        bridgechainRepository: 'https://github.com/arkecosystem/core.git'
+        bridgechainRepository: 'https://github.com/spendchain/core.git'
       }
     }
   },

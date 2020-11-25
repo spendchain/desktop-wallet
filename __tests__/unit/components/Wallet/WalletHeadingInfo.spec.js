@@ -85,8 +85,8 @@ describe('WalletHeadingInfo component', () => {
   it('should display the balance in the currency network', () => {
     const balance = wrapper.find('.WalletHeading__balance')
 
-    const arkBalance = wrapper.vm.currency_subToUnit(sampleWalletData.balance)
-    const formattedBalance = wrapper.vm.currency_format(arkBalance, { currencyFrom: 'network' })
+    const spndBalance = wrapper.vm.currency_subToUnit(sampleWalletData.balance)
+    const formattedBalance = wrapper.vm.currency_format(spndBalance, { currencyFrom: 'network' })
 
     expect(balance.text()).toContain(formattedBalance)
   })
@@ -99,8 +99,8 @@ describe('WalletHeadingInfo component', () => {
     it('should display the balance in the alternative currency too', () => {
       const balance = wrapper.find('.WalletHeading__balance__alternative')
 
-      const arkBalance = wrapper.vm.currency_subToUnit(sampleWalletData.balance)
-      const formattedBalance = wrapper.vm.currency_format(arkBalance * price, { currency: alternativeCurrency })
+      const spndBalance = wrapper.vm.currency_subToUnit(sampleWalletData.balance)
+      const formattedBalance = wrapper.vm.currency_format(spndBalance * price, { currency: alternativeCurrency })
 
       expect(balance.text()).toContain(formattedBalance)
     })

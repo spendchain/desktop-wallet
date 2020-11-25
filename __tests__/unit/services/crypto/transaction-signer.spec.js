@@ -30,7 +30,7 @@ jest.mock('@/store', () => ({
     'session/network': {},
     'network/byId': (id) => {
       let version = 23
-      if (id === 'ark.devnet') {
+      if (id === 'spnd.devnet') {
         version = 30
       }
 

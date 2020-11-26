@@ -12,8 +12,8 @@ localVue.use(Vuelidate)
 const i18n = installI18n(localVue)
 
 const network = {
-  token: 'SPND',
-  symbol: 'SPND',
+  token: 'ARK',
+  symbol: 'ARK', // Todo: define symbol
   fractionDigits: 8,
   version: 23,
   wif: 170,

@@ -15,7 +15,7 @@ const i18n = installI18n(localVue)
 const globalNetwork = Object.freeze({
   id: 'network-1',
   fractionDigits: 8,
-  token: 'SPND',
+  token: 'ARK',
   version: 23,
   wif: 170,
   market: {

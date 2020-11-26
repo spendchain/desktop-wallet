@@ -12,8 +12,8 @@ localVue.use(Vuelidate)
 const i18n = installI18n(localVue)
 
 const network = {
-  token: 'SPND',
-  symbol: 'SPND',
+  token: 'ARK',
+  symbol: 'ARK',
   fractionDigits: 8,
   version: 23,
   wif: 170,
@@ -522,7 +522,7 @@ describe('TransactionFormVote', () => {
       it('should update forged value', () => {
         wrapper.vm.fetchForged()
 
-        expect(wrapper.vm.forged).toEqual('SPND 10.00')
+        expect(wrapper.vm.forged).toEqual('ARK 10.00')
       })
     })
 

@@ -4,7 +4,7 @@ import { MarketChart } from '@/components/MarketChart'
 const mocks = {
   session_network: {
     market: {
-      ticker: 'SPND'
+      ticker: 'ARK'
     }
   },
   session_profile: {

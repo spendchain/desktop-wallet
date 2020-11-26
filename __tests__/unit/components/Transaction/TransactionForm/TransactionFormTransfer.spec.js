@@ -16,7 +16,7 @@ const i18n = installI18n(localVue)
 const globalNetwork = Object.freeze({
   id: 'network-1',
   fractionDigits: 8,
-  token: 'SPND',
+  token: 'ARK',
   version: 23,
   wif: 170,
   market: {
@@ -353,7 +353,7 @@ describe('TransactionFormTransfer', () => {
         })
 
         expect($tSpy).toHaveBeenCalledWith('INPUT_CURRENCY.ERROR.LESS_THAN_MINIMUM', {
-          amount: '0.00000001 SPND'
+          amount: '0.00000001 ARK'
         })
         expect(response).toBe('INPUT_CURRENCY.ERROR.LESS_THAN_MINIMUM')
         expect(simpleFormatCryptoSpy).toHaveBeenCalledWith('0.00000001')
@@ -373,7 +373,7 @@ describe('TransactionFormTransfer', () => {
         })
 
         expect($tSpy).toHaveBeenCalledWith('INPUT_CURRENCY.ERROR.LESS_THAN_MINIMUM', {
-          amount: '0.01 SPND'
+          amount: '0.01 ARK'
         })
         expect(response).toBe('INPUT_CURRENCY.ERROR.LESS_THAN_MINIMUM')
         expect(simpleFormatCryptoSpy).toHaveBeenCalledWith('0.01')
@@ -574,7 +574,7 @@ describe('TransactionFormTransfer', () => {
       it('should return profile network if no network for profile selected', () => {
         const profileNetwork = {
           fractionDigits: 2,
-          token: 'SPND', // DARK
+          token: 'DARK', // DARK
           version: 30,
           wif: 170,
           market: {

@@ -555,7 +555,7 @@ describe('Services > Client', () => {
             address: 'address-1',
             publicKey: 'publicKey-1',
             name: 'Business Name',
-            website: 'https://dexplorer.spendchain.net',
+            website: 'https://dexplorer.spendchain.org',
             isResigned: false
           }
         ]

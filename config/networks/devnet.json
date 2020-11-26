@@ -53,7 +53,7 @@
     "maxLength": 255
   },
   "nethash": "321e91110d3b1a6845f25359df13a919492f316a21272ed257ccd088936c3aa0",
-  "explorer": "https://dexplorer.spendchain.net",
+  "explorer": "https://dexplorer.spendchain.org",
   "knownWalletsUrl": "",
   "token": "SPND",
   "subunit": "spndtoshi",

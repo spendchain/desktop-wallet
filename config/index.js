@@ -154,7 +154,7 @@ exports.PLUGINS = {
     'plugin'
   ],
   officialScope: 'arkecosystem',
-  officialAuthor: 'Spendchain',
+  officialAuthor: 'spendchain',
   path: path.resolve(os.homedir(), '.ark-desktop/plugins'),
   reportUrl: 'https://www.spend.com/contact-us',
   sharePath: path.resolve(os.homedir(), '.ark-desktop/share'),

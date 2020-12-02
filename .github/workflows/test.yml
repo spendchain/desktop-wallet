@@ -90,20 +90,20 @@ jobs:
       # - name: Upload .AppImage
       #   uses: actions/upload-artifact@master
       #   with:
-      #     name: ark-desktop-wallet-linux-2.9.4.AppImage
-      #     path: build/target/ark-desktop-wallet-linux-x86_64-2.9.4.AppImage
+      #     name: spnd-desktop-wallet-linux-1.0.1.AppImage
+      #     path: build/target/spnd-desktop-wallet-linux-x86_64-1.0.1.AppImage
 
       # - name: Upload .tar.gz
       #   uses: actions/upload-artifact@master
       #   with:
-      #     name: ark-desktop-wallet-linux-2.9.4.tar.gz
-      #     path: build/target/ark-desktop-wallet-linux-x64-2.9.4.tar.gz
+      #     name: spnd-desktop-wallet-linux-1.0.1.tar.gz
+      #     path: build/target/spnd-desktop-wallet-linux-x64-1.0.1.tar.gz
 
       - name: Upload .deb
         uses: actions/upload-artifact@master
         with:
-          name: ark-desktop-wallet-linux-2.9.4-${{ github.sha }}.deb
-          path: build/target/ark-desktop-wallet-linux-amd64-2.9.4.deb
+          name: spnd-desktop-wallet-linux-1.0.1-${{ github.sha }}.deb
+          path: build/target/spnd-desktop-wallet-linux-amd64-1.0.1.deb
 
   build-macOS:
     runs-on: macos-latest
@@ -138,14 +138,14 @@ jobs:
       # - name: Upload .zip
       #   uses: actions/upload-artifact@master
       #   with:
-      #     name: ark-desktop-wallet-mac-2.9.4.zip
-      #     path: build/target/ark-desktop-wallet-mac-2.9.4.zip
+      #     name: spnd-desktop-wallet-mac-1.0.1.zip
+      #     path: build/target/spnd-desktop-wallet-mac-1.0.1.zip
 
       - name: Upload .dmg
         uses: actions/upload-artifact@v1
         with:
-          name: ark-desktop-wallet-mac-2.9.4-${{ github.sha }}.dmg
-          path: build/target/ark-desktop-wallet-mac-2.9.4.dmg
+          name: spnd-desktop-wallet-mac-1.0.1-${{ github.sha }}.dmg
+          path: build/target/spnd-desktop-wallet-mac-1.0.1.dmg
 
   build-windows:
     runs-on: windows-latest
@@ -173,5 +173,5 @@ jobs:
       - name: Upload .exe
         uses: actions/upload-artifact@v1
         with:
-          name: ark-desktop-wallet-win-2.9.4-${{ github.sha }}.exe
-          path: build/target/ark-desktop-wallet-win-2.9.4.exe
+          name: spnd-desktop-wallet-win-1.0.1-${{ github.sha }}.exe
+          path: build/target/spnd-desktop-wallet-win-1.0.1.exe

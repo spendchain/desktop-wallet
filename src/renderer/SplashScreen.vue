@@ -59,7 +59,7 @@
     </div>
 
     <div class="flex-inline text-sm pb-4">
-      {{ `${$t('COMMON.VERSION')} ${forkVersion}` }}
+      {{ `${$t('COMMON.VERSION')} ${version}` }}
     </div>
   </div>
 </template>
@@ -74,9 +74,6 @@ export default {
   computed: {
     version () {
       return packageJson.version
-    },
-    forkVersion () {
-      return packageJson['fork-version']
     },
     loadingMessage () {
       if (window.navigator.onLine) {

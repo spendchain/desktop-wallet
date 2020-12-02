@@ -46,20 +46,20 @@ jobs:
       # - name: Upload .AppImage
       #   uses: actions/upload-artifact@master
       #   with:
-      #     name: ark-desktop-wallet-linux-2.9.4.AppImage
-      #     path: build/target/ark-desktop-wallet-linux-x86_64-2.9.4.AppImage
+      #     name: spnd-desktop-wallet-linux-1.0.1.AppImage
+      #     path: build/target/spnd-desktop-wallet-linux-x86_64-1.0.1.AppImage
 
       # - name: Upload .tar.gz
       #   uses: actions/upload-artifact@master
       #   with:
-      #     name: ark-desktop-wallet-linux-2.9.4.tar.gz
-      #     path: build/target/ark-desktop-wallet-linux-x64-2.9.4.tar.gz
+      #     name: spnd-desktop-wallet-linux-1.0.1.tar.gz
+      #     path: build/target/spnd-desktop-wallet-linux-x64-1.0.1.tar.gz
 
       - name: Upload .deb
         uses: actions/upload-artifact@master
         with:
-          name: ark-desktop-wallet-linux-2.9.4-${{ github.sha }}.deb
-          path: build/target/ark-desktop-wallet-linux-amd64-2.9.4.deb
+          name: spnd-desktop-wallet-linux-1.0.1-${{ github.sha }}.deb
+          path: build/target/spnd-desktop-wallet-linux-amd64-1.0.1.deb
 
   build-macOS:
     runs-on: macos-latest
@@ -70,6 +70,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Decrypt large secret
+        run: ./.github/scripts/decrypt_secret.sh
+        env:
+          LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
 
       - name: Cache node modules
         uses: actions/cache@v1
@@ -88,12 +93,14 @@ jobs:
 
       - name: Prepare for app notarization
         run: |
-          mkdir -p ~/private_keys/
-          echo '${{ secrets.APPLE_API_KEY }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY_ID }}.p8
+          mv ~/private_keys/AuthKey.p8 ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY_ID }}.p8
+          mv ~/private_keys/CSCKey.p12 ~/private_keys/DeveloperIDApplication.p12
 
       - name: Build
         run: yarn build:mac
         env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           APPLE_API_KEY_ISSUER_ID: ${{ secrets.APPLE_API_KEY_ISSUER_ID }}
           CSC_LINK: ${{ secrets.CSC_LINK }}
@@ -102,14 +109,14 @@ jobs:
       # - name: Upload .zip
       #   uses: actions/upload-artifact@master
       #   with:
-      #     name: ark-desktop-wallet-mac-2.9.4.zip
-      #     path: build/target/ark-desktop-wallet-mac-2.9.4.zip
+      #     name: spnd-desktop-wallet-mac-1.0.1.zip
+      #     path: build/target/spnd-desktop-wallet-mac-1.0.1.zip
 
       - name: Upload .dmg
         uses: actions/upload-artifact@v1
         with:
-          name: ark-desktop-wallet-mac-2.9.4-${{ github.sha }}.dmg
-          path: build/target/ark-desktop-wallet-mac-2.9.4.dmg
+          name: spnd-desktop-wallet-mac-1.0.1-${{ github.sha }}.dmg
+          path: build/target/spnd-desktop-wallet-mac-1.0.1.dmg
 
   build-windows:
     runs-on: windows-latest
@@ -137,5 +144,5 @@ jobs:
       - name: Upload .exe
         uses: actions/upload-artifact@v1
         with:
-          name: ark-desktop-wallet-win-2.9.4-${{ github.sha }}.exe
-          path: build/target/ark-desktop-wallet-win-2.9.4.exe
+          name: spnd-desktop-wallet-win-1.0.1-${{ github.sha }}.exe
+          path: build/target/spnd-desktop-wallet-win-1.0.1.exe

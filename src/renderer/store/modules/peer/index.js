@@ -124,7 +124,6 @@ export default {
      * @return {Object[]} containing peer objects
      */
     randomSeedPeers: (_, __, ___, rootGetters) => (amount = 5, networkId = null) => {
-      console.log(networkId, config)
       if (!networkId) {
         const profile = rootGetters['session/profile']
         if (!profile || !profile.networkId) {
@@ -569,6 +568,7 @@ export default {
       try {
         networkConfig = await ClientService.fetchNetworkConfig(baseUrl, timeout)
       } catch (error) {
+        console.log(baseUrl)
         console.error('Could not get network config:', error)
       }
 

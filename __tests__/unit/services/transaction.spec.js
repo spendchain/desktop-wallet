@@ -935,7 +935,7 @@ describe('Services > Transaction', () => {
             '@arkecosystem/core-api': 4003
           },
           genesisHash: '2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867',
-          bridgechainRepository: 'https://github.com/arkecosystem/core.git'
+          bridgechainRepository: 'https://github.com/spendchain/core.git'
         })
         .fee(1)
         .sign(senderPassphrase)
@@ -989,7 +989,7 @@ describe('Services > Transaction', () => {
         .BusinessRegistrationBuilder()
         .businessRegistrationAsset({
           name: 'Name',
-          website: 'http://github.com/ark/core.git'
+          website: 'http://github.com/spendchain-test/core.git'
         })
         .fee(1)
         .sign(senderPassphrase)
@@ -1013,7 +1013,7 @@ describe('Services > Transaction', () => {
             '@arkecosystem/core-api': 4003
           },
           genesisHash: '2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867',
-          bridgechainRepository: 'https://github.com/arkecosystem/core.git'
+          bridgechainRepository: 'https://github.com/spendchain/core.git'
         })
         .fee(1)
         .sign(senderPassphrase)
@@ -1052,7 +1052,7 @@ describe('Services > Transaction', () => {
         .BusinessRegistrationBuilder()
         .businessRegistrationAsset({
           name: 'Name',
-          website: 'http://github.com/ark/core.git'
+          website: 'http://github.com/spendchian-test/core.git'
         })
         .fee(1)
         .sign(senderPassphrase)
@@ -1101,7 +1101,7 @@ describe('Services > Transaction', () => {
             '@arkecosystem/core-api': 4003
           },
           genesisHash: '2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867',
-          bridgechainRepository: 'https://github.com/arkecosystem/core.git'
+          bridgechainRepository: 'https://github.com/spendchain/core.git'
         })
         .fee(1)
         .sign(senderPassphrase)

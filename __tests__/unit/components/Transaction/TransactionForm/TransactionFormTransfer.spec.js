@@ -574,7 +574,7 @@ describe('TransactionFormTransfer', () => {
       it('should return profile network if no network for profile selected', () => {
         const profileNetwork = {
           fractionDigits: 2,
-          token: 'DARK',
+          token: 'DARK', // DARK
           version: 30,
           wif: 170,
           market: {

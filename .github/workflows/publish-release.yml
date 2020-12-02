@@ -22,7 +22,7 @@ jobs:
       - name: Determine the release changelog
         id: derive_release_changelog
         run: |
-          CURRENT_VERSION=$(jq -r '.tag_name' <(curl https://api.github.com/repos/spndEcosystem/desktop-wallet/releases/latest -s))
+          CURRENT_VERSION=$(jq -r '.tag_name' <(curl https://api.github.com/repos/spendchain/desktop-wallet/releases/latest -s))
           CHANGELOG_URL=$(echo "${{ secrets.CHANGELOG_SOURCE }}" | sed "s/__VERSION__/${CURRENT_VERSION}/g")
           CHANGELOG=$(curl -s $CHANGELOG_URL)
           echo "::set-output name=body::${CHANGELOG}"
@@ -118,6 +118,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Decrypt large secret
+        run: ./.github/scripts/decrypt_secret.sh
+        env:
+          LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
+
       - name: Cache node modules
         uses: actions/cache@v1
         with:
@@ -135,13 +140,15 @@ jobs:
 
       - name: Prepare for app notarization
         run: |
-          mkdir -p ~/private_keys/
-          echo '${{ secrets.APPLE_API_KEY }}' > ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY_ID }}.p8
+          mv ~/private_keys/AuthKey.p8 ~/private_keys/AuthKey_${{ secrets.APPLE_API_KEY_ID }}.p8
+          mv ~/private_keys/CSCKey.p12 ~/private_keys/DeveloperIDApplication.p12
 
       - name: Build & Publish
         run: yarn build:mac:publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
           APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
           APPLE_API_KEY_ISSUER_ID: ${{ secrets.APPLE_API_KEY_ISSUER_ID }}
           CSC_LINK: ${{ secrets.CSC_LINK }}

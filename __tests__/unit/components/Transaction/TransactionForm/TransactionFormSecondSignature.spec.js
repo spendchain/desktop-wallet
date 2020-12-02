@@ -13,7 +13,7 @@ const i18n = installI18n(localVue)
 
 const network = {
   token: 'ARK',
-  symbol: 'ARK',
+  symbol: 'ARK', // Todo: define symbol
   fractionDigits: 8,
   version: 23,
   wif: 170,

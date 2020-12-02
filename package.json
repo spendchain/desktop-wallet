@@ -276,5 +276,11 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "changelog": {
+    "labels": {
+      "feature": "New Feature",
+      "bug": "Bug Fix"
+    }
   }
 }

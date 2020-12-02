@@ -19,13 +19,17 @@ jobs:
           RELEASE_VERSION=$(cat package.json | jq -r '.version')
           echo "::set-output name=version::${RELEASE_VERSION}"
 
-      - name: Determine the release changelog
-        id: derive_release_changelog
-        run: |
-          CURRENT_VERSION=$(jq -r '.tag_name' <(curl https://api.github.com/repos/spendchain/desktop-wallet/releases/latest -s))
-          CHANGELOG_URL=$(echo "${{ secrets.CHANGELOG_SOURCE }}" | sed "s/__VERSION__/${CURRENT_VERSION}/g")
-          CHANGELOG=$(curl -s $CHANGELOG_URL)
-          echo "::set-output name=body::${CHANGELOG}"
+      - uses: RiskLedger/generate-changelog@v2
+        env:
+          GITHUB_AUTH: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Determine the release changelog
+      #   id: derive_release_changelog
+      #   run: |
+      #     CURRENT_VERSION=$(jq -r '.tag_name' <(curl https://api.github.com/repos/spendchain/desktop-wallet/releases/latest -s))
+      #     CHANGELOG_URL=$(echo "${{ secrets.CHANGELOG_SOURCE }}" | sed "s/__VERSION__/${CURRENT_VERSION}/g")
+      #     CHANGELOG=$(curl -s $CHANGELOG_URL)
+      #     echo "::set-output name=body::${CHANGELOG}"
 
       - name: Create Release
         id: create_release

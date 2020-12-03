@@ -8,6 +8,38 @@ on:
     types: [ready_for_review, synchronize, opened]
 
 jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Determine the release version
+        id: derive_release_version
+        run: |
+          RELEASE_VERSION=$(cat package.json | jq -r '.version')
+          echo "::set-output name=version::${RELEASE_VERSION}"
+
+      - name: Changelog
+        uses: scottbrenner/generate-changelog-action@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.derive_release_version.outputs.version }}
+          release_name: Version ${{ steps.derive_release_version.outputs.version }}
+          draft: true
+          prerelease: false
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+
   lint-unit:
     runs-on: ubuntu-latest
 
